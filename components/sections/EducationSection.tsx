@@ -11,15 +11,17 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import { slideInRight, fadeInUp } from "@/lib/animations";
 
 export function EducationSection() {
   return (
     <section className="space-y-6">
       <motion.h2
         className="text-3xl font-bold tracking-tight"
-        initial={{ opacity: 0, x: -20 }}
-        whileInView={{ opacity: 1, x: 0 }}
+        initial="hidden"
+        whileInView="visible"
         viewport={{ once: true }}
+        variants={slideInRight}
       >
         Education
       </motion.h2>
@@ -28,10 +30,11 @@ export function EducationSection() {
         {education.map((edu, index) => (
           <motion.div
             key={edu.id}
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
+            initial="hidden"
+            whileInView="visible"
             viewport={{ once: true }}
             transition={{ delay: index * 0.1 }}
+            variants={fadeInUp}
           >
             <Card className="h-full flex flex-col hover:shadow-md transition-shadow">
               <CardHeader>

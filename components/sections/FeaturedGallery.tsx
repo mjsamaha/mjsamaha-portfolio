@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { ChevronLeft, ChevronRight, ExternalLink } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
+import { fadeInUp } from "@/lib/animations";
 
 const photos = [
   {
@@ -50,9 +51,10 @@ export default function FeaturedGallery() {
     <section className="py-24 bg-background">
       <div className="container mx-auto px-4 max-w-6xl">
         <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
+            initial="hidden"
+            whileInView="visible"
             viewport={{ once: true }}
+            variants={fadeInUp}
             className="flex flex-col md:flex-row items-center justify-between mb-12 gap-6"
         >
           <div>

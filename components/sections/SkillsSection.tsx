@@ -5,20 +5,7 @@ import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
 import { skills } from "@/src/content/skills";
 import { useEffect, useState } from "react";
-
-const fadeIn = {
-  initial: { opacity: 0, y: 20 },
-  animate: { opacity: 1, y: 0 },
-  transition: { duration: 0.5, ease: "easeOut" }
-};
-
-const staggerContainer = {
-  animate: {
-    transition: {
-      staggerChildren: 0.1
-    }
-  }
-};
+import { fadeIn, staggerContainer } from "@/lib/animations";
 
 // Component to animate progress bar on mount
 const AnimatedProgress = ({ level }: { level: number }) => {

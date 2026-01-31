@@ -9,20 +9,7 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import { experience } from "@/src/content/resume";
-
-const slideInLeft = {
-  initial: { opacity: 0, x: -50 },
-  animate: { opacity: 1, x: 0 },
-  transition: { duration: 0.5, ease: "easeOut" }
-};
-
-const staggerContainer = {
-  animate: {
-    transition: {
-      staggerChildren: 0.2
-    }
-  }
-};
+import { slideInLeft, staggerContainer } from "@/lib/animations";
 
 export default function ExperienceSection() {
   // Sort experience by newest first (handling the sorting here for robustness)
