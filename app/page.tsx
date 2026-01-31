@@ -1,24 +1,23 @@
-import Link from "next/link";
-import { Button } from "@/components/ui/button";
+import AboutSection from "@/components/sections/AboutSection";
+import SkillsSection from "@/components/sections/SkillsSection";
+import ExperienceSection from "@/components/sections/ExperienceSection";
+import { EducationSection } from "@/components/sections/EducationSection";
+import CTASection from "@/components/sections/CTASection";
+import FeaturedGallery from "@/components/sections/FeaturedGallery";
 
 export default function Home() {
   return (
-    <div className="flex min-h-[calc(100vh-200px)] items-center justify-center">
-      <div className="text-center space-y-6 px-4">
-        <h1 className="text-5xl md:text-6xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
-          Matthew Samaha
-        </h1>
-        <p className="text-xl md:text-2xl text-muted-foreground max-w-3xl">
-          Full-Stack Developer | Naval Reservist | Bird Photographer
-        </p>
-        <div className="pt-4">
-          <Button asChild size="lg">
-            <Link href="/projects">
-              View Projects
-            </Link>
-          </Button>
-        </div>
+    <main className="min-h-screen bg-background text-foreground">
+      <AboutSection />
+      
+      <div className="container mx-auto px-4 space-y-24 pb-24">
+        <SkillsSection />
+        <ExperienceSection />
+        <EducationSection />
       </div>
-    </div>
+
+      <CTASection />
+      <FeaturedGallery />
+    </main>
   );
 }

@@ -61,7 +61,7 @@ export function OrganizationHero({ onViewProjectsClick }: OrganizationHeroProps)
               asChild
               className="border-slate-300 dark:border-slate-600 text-slate-700 dark:text-blue-100 hover:bg-slate-200 dark:hover:bg-slate-800 hover:text-slate-900 dark:hover:text-white bg-transparent"
             >
-              <Link href="https://oaksignal.ca" target="_blank" rel="noopener noreferrer">
+              <Link href="https://mjsamaha.github.io/oaksignal-landing/" target="_blank" rel="noopener noreferrer">
                 Visit Website
                 <ExternalLink className="ml-2 h-4 w-4" />
               </Link>
