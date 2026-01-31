@@ -48,6 +48,15 @@ export interface TechnicalDetails {
 }
 
 /**
+ * Organization metadata
+ */
+export interface Organization {
+  readonly name: string;
+  readonly slug: string;
+  readonly tagline: string;
+}
+
+/**
  * Timeline phase (details can be string or array)
  */
 export interface TimelinePhase {
@@ -99,6 +108,7 @@ export interface Project {
   readonly year?: number;
   readonly category?: ProjectCategory;
   readonly thumbnail?: string;
+  readonly organization?: Organization;
 }
 
 // ============================================================================
@@ -198,7 +208,12 @@ export const projects = [
       ]
     },
     year: 2026,
-    category: "LMS" as const
+    category: "LMS" as const,
+    organization: {
+      name: "OakSignal",
+      slug: "oaksignal",
+      tagline: "Digital tools for cadet organizations"
+    }
   },
   {
     id: 2,
@@ -311,7 +326,12 @@ export const projects = [
       ]
     },
     year: 2026,
-    category: "Inventory" as const
+    category: "Inventory" as const,
+    organization: {
+      name: "OakSignal",
+      slug: "oaksignal",
+      tagline: "Digital tools for cadet organizations"
+    }
   }
 ] as const satisfies readonly Project[];
 
@@ -364,6 +384,15 @@ export function getAllSlugs(): readonly string[] {
  */
 export function getProjectsByCategory(category: ProjectCategory): readonly Project[] {
   return projects.filter(project => project.category === category);
+}
+
+/**
+ * Get projects filtered by organization slug
+ * @param orgSlug - Organization slug to filter by (e.g. "oaksignal")
+ * @returns Array of projects belonging to the organization
+ */
+export function getProjectsByOrg(orgSlug: string): readonly Project[] {
+  return projects.filter(project => project.organization?.slug === orgSlug);
 }
 
 // ============================================================================
