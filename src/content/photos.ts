@@ -12,13 +12,13 @@
 /**
  * Common photo tags for categorization
  */
-export type PhotoTag = 
-  | "raptor" 
-  | "waterfowl" 
-  | "songbird" 
+export type PhotoTag =
+  | "raptor"
+  | "waterfowl"
+  | "songbird"
   | "shorebird"
-  | "flight" 
-  | "portrait" 
+  | "flight"
+  | "portrait"
   | "perched"
   | "hunting"
   | "breeding-plumage"
@@ -69,8 +69,8 @@ export const photos = [
   {
     id: "red-tailed-hawk-1",
     src: "RedTailedHawk.jpg",
-    thumbnail: "photos/thumbnails/RedTailedHawk-thumb.jpg",
-    fullSize: "photos/full/RedTailedHawk.jpg",
+    thumbnail: "/photos/RedTailedHawk.jpg",
+    fullSize: "/photos/RedTailedHawk.jpg",
     alt: "Red-tailed Hawk perched, displaying distinctive red tail feathers",
     commonName: "Red-tailed Hawk",
     scientificName: "Buteo jamaicensis",
@@ -90,8 +90,8 @@ export const photos = [
   {
     id: "osprey-1",
     src: "Osprey.jpg",
-    thumbnail: "photos/thumbnails/Osprey-thumb.jpg",
-    fullSize: "photos/full/Osprey.jpg",
+    thumbnail: "/photos/Osprey.jpg",
+    fullSize: "/photos/Osprey.jpg",
     alt: "Osprey in natural habitat near water",
     commonName: "Osprey",
     scientificName: "Pandion haliaetus",
@@ -111,14 +111,14 @@ export const photos = [
   {
     id: "red-necked-grebe-1",
     src: "RedNeckedGrebe1.jpg",
-    thumbnail: "photos/thumbnails/RedNeckedGrebe1-thumb.jpg",
-    fullSize: "photos/full/RedNeckedGrebe1.jpg",
+    thumbnail: "/photos/RedNeckedGrebe1.jpg",
+    fullSize: "/photos/RedNeckedGrebe1.jpg",
     alt: "Red-necked Grebe swimming, showing distinctive neck coloring",
     commonName: "Red-necked Grebe",
     scientificName: "Podiceps grisegena",
     location: "Colonel Samuel Smith Park, Toronto, ON",
     year: 2024,
-    featured: true,
+    featured: false,
     tags: ["waterfowl", "portrait", "breeding-plumage"] as PhotoTag[]
   },
   {
@@ -137,14 +137,14 @@ export const photos = [
   {
     id: "lesser-yellowlegs-1",
     src: "LesserYellowlegs.jpg",
-    thumbnail: "photos/thumbnails/LesserYellowlegs-thumb.jpg",
-    fullSize: "photos/full/LesserYellowlegs.jpg",
+    thumbnail: "/photos/LesserYellowlegs.jpg",
+    fullSize: "/photos/LesserYellowlegs.jpg",
     alt: "Lesser Yellowlegs wading in shallow water",
     commonName: "Lesser Yellowlegs",
     scientificName: "Tringa flavipes",
     location: "Rattray Marsh, Mississauga, ON",
     year: 2024,
-    featured: false,
+    featured: true,
     tags: ["shorebird", "portrait"] as PhotoTag[]
   }
 ] satisfies Photo[];
@@ -168,7 +168,7 @@ export function getFeaturedPhotos(): Photo[] {
  */
 export function getPhotosBySpecies(commonName: string): Photo[] {
   const searchTerm = commonName.toLowerCase();
-  return photos.filter(photo => 
+  return photos.filter(photo =>
     photo.commonName.toLowerCase().includes(searchTerm)
   );
 }
@@ -198,7 +198,7 @@ export function getPhotosByTag(tag: PhotoTag): Photo[] {
  */
 export function getPhotosByLocation(location: string): Photo[] {
   const searchTerm = location.toLowerCase();
-  return photos.filter(photo => 
+  return photos.filter(photo =>
     photo.location?.toLowerCase().includes(searchTerm)
   );
 }
