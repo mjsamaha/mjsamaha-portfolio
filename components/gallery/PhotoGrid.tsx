@@ -33,7 +33,7 @@ const itemVariants = {
     }
 };
 
-export function PhotoGrid({ photos, onPhotoClick, currentAlbum }: PhotoGridProps) {
+export function PhotoGrid({ photos, onPhotoClick }: PhotoGridProps) {
     if (photos.length === 0) {
         return (
             <div className="text-center py-20 text-muted-foreground">

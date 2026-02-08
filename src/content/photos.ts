@@ -181,8 +181,8 @@ export const photos = [
   {
     id: "red-breasted-merganser-1",
     src: "RedBrestedMerganser.jpg",
-    thumbnail: "/photos/thumbnails/RedBrestedMerganser-thumb.jpg",
-    fullSize: "/photos/full/RedBrestedMerganser.jpg",
+    thumbnail: "/photos/RedBrestedMerganser.jpg",
+    fullSize: "/photos/RedBrestedMerganser.jpg",
     alt: "Red-breasted Merganser displaying characteristic crest and plumage",
     commonName: "Red-breasted Merganser",
     scientificName: "Mergus serrator",
@@ -315,7 +315,7 @@ export const photos = [
     location: "Colonel Samuel Smith Park, Toronto, ON",
     year: 2024,
     featured: false,
-    tags: ["waterfowl", "swimming"] as PhotoTag[],
+    tags: ["waterfowl", "portrait"] as PhotoTag[],
     album: "waterfowl"
   },
   {
@@ -329,7 +329,7 @@ export const photos = [
     location: "Colonel Samuel Smith Park, Toronto, ON",
     year: 2024,
     featured: false,
-    tags: ["waterfowl", "swimming"] as PhotoTag[],
+    tags: ["waterfowl", "portrait"] as PhotoTag[],
     album: "waterfowl"
   }
 ] satisfies Photo[];

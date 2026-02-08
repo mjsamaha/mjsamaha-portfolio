@@ -4,8 +4,9 @@ import { Album, AlbumCategory, getAlbumPhotoCount, getAlbumCoverPhoto } from "@/
 import { cn } from "@/lib/utils";
 import { Card, CardContent, CardFooter } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Bird, Waves, Music, Shell, Image as ImageIcon } from "lucide-react";
+import { Image as ImageIcon } from "lucide-react";
 import Image from "next/image";
+import { getAlbumIcon } from "@/lib/album-config";
 
 interface AlbumGridProps {
     albums: Album[];
@@ -13,13 +14,6 @@ interface AlbumGridProps {
     onAlbumSelect: (album: AlbumCategory | null) => void;
     currentPhotoCount: number; // useful for the "All Photos" card
 }
-
-const iconMap = {
-    "Bird": Bird,
-    "Waves": Waves,
-    "Music": Music,
-    "Shell": Shell,
-};
 
 // Separate component to handle data fetching for cover photo to keep main component clean
 function AlbumCover({ id }: { id: AlbumCategory }) {
@@ -82,7 +76,7 @@ export function AlbumGrid({
 
             {/* Dynamic Album Cards */}
             {albums.map((album) => {
-                const IconComponent = iconMap[album.icon as keyof typeof iconMap] || Bird;
+                const IconComponent = getAlbumIcon(album.id);
                 const photoCount = getAlbumPhotoCount(album.id);
                 const isActive = selectedAlbum === album.id;
 

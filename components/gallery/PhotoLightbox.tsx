@@ -77,7 +77,7 @@ export function PhotoLightbox({
 
     return (
         <Dialog open={isOpen} onOpenChange={(open) => !open && onClose()}>
-            <DialogContent className="max-w-[95vw] lg:max-w-7xl h-[90vh] p-0 gap-0 overflow-hidden bg-background/95 backdrop-blur-xl border-border/50">
+            <DialogContent className="max-w-[95vw] lg:max-w-7xl h-[90vh] p-0 gap-0 overflow-hidden bg-background/95 backdrop-blur-xl border-border/50 [&>button]:hidden">
                 <div className="flex flex-col lg:flex-row h-full w-full">
 
                     {/* Left Side: Image Viewer */}
@@ -170,15 +170,9 @@ export function PhotoLightbox({
                         {/* Header / Custom Close */}
                         <div className="flex items-center justify-between p-4 border-b border-border">
                             <div className="flex items-center gap-2">
-                                {albumMetadata ? (
-                                    <Badge variant="outline" className="text-xs font-normal">
-                                        {albumMetadata.name}
-                                    </Badge>
-                                ) : (
-                                    <Badge variant="outline" className="text-xs font-normal">
-                                        Gallery
-                                    </Badge>
-                                )}
+                                <Badge variant="outline" className="text-xs font-normal">
+                                    Gallery
+                                </Badge>
                                 <span className="text-xs text-muted-foreground">
                                     {currentIndex + 1} / {photos.length}
                                 </span>
