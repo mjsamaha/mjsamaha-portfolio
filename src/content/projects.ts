@@ -109,6 +109,8 @@ export interface Project {
   readonly category?: ProjectCategory;
   readonly thumbnail?: string;
   readonly organization?: Organization;
+  readonly metrics?: readonly { label: string; value: string }[];
+  readonly liveUrl?: string;
 }
 
 // ============================================================================
@@ -169,34 +171,34 @@ export const projects = [
       security: "Row-level security, email domain validation, encrypted traffic"
     },
     timeline: [
-      { 
-        phase: "Alpha Launch", 
-        date: "March 2026", 
-        details: "Pilot with Oakville Sea Cadets" 
+      {
+        phase: "Alpha Launch",
+        date: "March 2026",
+        details: "Pilot with Oakville Sea Cadets"
       },
-      { 
-        phase: "Beta Launch", 
-        date: "April 2026", 
-        details: "Expanded testing and feature refinement" 
+      {
+        phase: "Beta Launch",
+        date: "April 2026",
+        details: "Expanded testing and feature refinement"
       },
-      { 
-        phase: "Expansion", 
-        date: "Q3 2026", 
-        details: "Rollout to future Sea Cadet units and potential Army/Air expansion" 
+      {
+        phase: "Expansion",
+        date: "Q3 2026",
+        details: "Rollout to future Sea Cadet units and potential Army/Air expansion"
       }
     ],
     roles: [
-      { 
-        role: "Junior Cadets", 
-        access: "Access learning materials, complete assessments, view own progress" 
+      {
+        role: "Junior Cadets",
+        access: "Access learning materials, complete assessments, view own progress"
       },
-      { 
-        role: "Senior Cadets", 
-        access: "Mentor/tutor capabilities + Junior access" 
+      {
+        role: "Senior Cadets",
+        access: "Mentor/tutor capabilities + Junior access"
       },
-      { 
-        role: "Officers/Instructors", 
-        access: "Full admin—create content, manage cadets, view analytics, configure unit settings" 
+      {
+        role: "Officers/Instructors",
+        access: "Full admin—create content, manage cadets, view analytics, configure unit settings"
       }
     ],
     multiTenantDetails: {
@@ -213,7 +215,13 @@ export const projects = [
       name: "OakSignal",
       slug: "oaksignal",
       tagline: "Digital tools for cadet organizations"
-    }
+    },
+    metrics: [
+      { label: "Active Users", value: "Pilot Phase" },
+      { label: "Modules", value: "4+" },
+      { label: "Platform", value: "Web & PWA" },
+      { label: "Architecture", value: "Multi-Tenant" }
+    ]
   },
   {
     id: 2,
@@ -305,17 +313,17 @@ export const projects = [
       }
     ],
     roles: [
-      { 
-        role: "Junior Cadets", 
-        access: "View-only access, ability to submit equipment requests" 
+      {
+        role: "Junior Cadets",
+        access: "View-only access, ability to submit equipment requests"
       },
-      { 
-        role: "Senior Cadets", 
-        access: "Limited admin access for day-to-day operations, equipment issue/return" 
+      {
+        role: "Senior Cadets",
+        access: "Limited admin access for day-to-day operations, equipment issue/return"
       },
-      { 
-        role: "Officers/Adult Staff", 
-        access: "Full administrative access, reporting, system configuration" 
+      {
+        role: "Officers/Adult Staff",
+        access: "Full administrative access, reporting, system configuration"
       }
     ],
     multiTenantDetails: {
@@ -331,7 +339,13 @@ export const projects = [
       name: "OakSignal",
       slug: "oaksignal",
       tagline: "Digital tools for cadet organizations"
-    }
+    },
+    metrics: [
+      { label: "Stage", value: "Planning" },
+      { label: "Exp. Launch", value: "Q4 2026" },
+      { label: "Target Users", value: "50+" },
+      { label: "Key Feature", value: "Audit Logs" }
+    ]
   }
 ] as const satisfies readonly Project[];
 

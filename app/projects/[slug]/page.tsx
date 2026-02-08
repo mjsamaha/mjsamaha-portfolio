@@ -1,49 +1,64 @@
-import Link from "next/link";
-import { ArrowLeft } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { getProjectBySlug, getAllSlugs } from "@/src/content/projects";
+import { ProjectHero } from "@/components/projects/ProjectHero";
+import { ProjectDetails } from "@/components/projects/ProjectDetails";
+import { TechStackShowcase } from "@/components/projects/TechStackShowcase";
+import { BackToProjects } from "@/components/projects/BackToProjects";
+import { notFound } from "next/navigation";
+import { Metadata } from "next";
 
-export default async function ProjectPage({
-  params,
-}: {
-  params: Promise<{ slug: string }>;
-}) {
+interface ProjectPageProps {
+  params: Promise<{
+    slug: string;
+  }>;
+}
+
+export async function generateStaticParams() {
+  const slugs = getAllSlugs();
+  return slugs.map((slug) => ({
+    slug: slug,
+  }));
+}
+
+export async function generateMetadata({ params }: ProjectPageProps): Promise<Metadata> {
   const { slug } = await params;
+  const project = getProjectBySlug(slug);
 
-  // Format slug for display: "lms-platform" → "LMS Platform"
-  const formatSlug = (slug: string) => {
-    return slug
-      .split("-")
-      .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-      .join(" ");
+  if (!project) {
+    return {
+      title: "Project Not Found",
+    };
+  }
+
+  return {
+    title: `${project.title} | Projects`,
+    description: project.description,
   };
+}
+
+export default async function ProjectPage({ params }: ProjectPageProps) {
+  const { slug } = await params;
+  const project = getProjectBySlug(slug);
+
+  if (!project) {
+    notFound();
+  }
 
   return (
-    <main className="max-w-7xl mx-auto px-4 py-12">
-      {/* Back Button */}
-      <div className="mb-6">
-        <Button variant="ghost" asChild>
-          <Link href="/projects">
-            <ArrowLeft className="mr-2 h-4 w-4" />
-            Back to Projects
-          </Link>
-        </Button>
-      </div>
+    <main className="container mx-auto px-4 py-8 min-h-screen">
+      <BackToProjects />
 
-      {/* Breadcrumb */}
-      <div className="mb-8">
-        <p className="text-sm text-muted-foreground">
-          Projects / {formatSlug(slug)}
-        </p>
-      </div>
+      <div className="space-y-16 animate-in fade-in duration-500">
+        <ProjectHero project={project} />
 
-      {/* Content */}
-      <div>
-        <h1 className="text-4xl font-bold mb-4">
-          Project: {formatSlug(slug)}
-        </h1>
-        <p className="text-lg text-muted-foreground">
-          Project details will be displayed here
-        </p>
+        <ProjectDetails project={project} />
+
+        <div className="max-w-5xl mx-auto">
+          <TechStackShowcase technicalDetails={project.technicalDetails} />
+        </div>
+
+        <div className="pt-12 border-t">
+          <BackToProjects className="py-0" />
+        </div>
       </div>
     </main>
   );
