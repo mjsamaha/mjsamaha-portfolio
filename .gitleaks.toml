@@ -1,0 +1,16 @@
+# Gitleaks configuration
+title = "gitleaks config"
+
+[extend]
+# Use the default ruleset provided by Gitleaks
+useDefault = true
+
+[allowlist]
+description = "Global allowlist"
+paths = [
+    "pnpm-lock.yaml",
+    "package-lock.json",
+    "yarn.lock",
+    "node_modules",
+    ".next"
+]
