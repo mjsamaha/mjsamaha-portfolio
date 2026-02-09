@@ -13,6 +13,7 @@ import { Button } from "@/components/ui/button";
 import { ArrowLeft } from "lucide-react";
 import { motion } from "framer-motion";
 import { getAlbumIcon } from "@/lib/album-config";
+import { createElement } from "react";
 
 interface EmptyAlbumProps {
     /** Album that has no photos */
@@ -25,7 +26,7 @@ interface EmptyAlbumProps {
  * Empty state component for albums with no photos
  */
 export function EmptyAlbum({ album, onBackToAlbums }: EmptyAlbumProps) {
-    const IconComponent = getAlbumIcon(album.id);
+    const icon = getAlbumIcon(album.id);
 
     return (
         <motion.div
@@ -36,7 +37,7 @@ export function EmptyAlbum({ album, onBackToAlbums }: EmptyAlbumProps) {
         >
             <Card className="max-w-md text-center p-12 bg-card border-border shadow-sm">
                 {/* Album Icon */}
-                <IconComponent className="mx-auto h-16 w-16 text-muted-foreground mb-4" />
+                {createElement(icon, { className: "mx-auto h-16 w-16 text-muted-foreground mb-4" })}
 
                 {/* Title */}
                 <h3 className="text-xl font-semibold mb-2 font-heading">

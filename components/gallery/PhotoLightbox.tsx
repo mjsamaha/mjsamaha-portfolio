@@ -2,11 +2,10 @@
 
 import { useEffect, useState } from "react";
 import Image from "next/image";
-import { Photo, AlbumCategory, Album } from "@/src/content/photos";
+import { Photo } from "@/src/content/photos";
 import {
     Dialog,
     DialogContent,
-    DialogHeader,
     DialogTitle,
     DialogDescription,
 } from "@/components/ui/dialog";
@@ -38,8 +37,6 @@ interface PhotoLightboxProps {
     isOpen: boolean;
     onClose: () => void;
     onNavigate: (direction: 'prev' | 'next') => void;
-    currentAlbum?: AlbumCategory | null;
-    albumMetadata?: Album; // Optional album metadata for context
 }
 
 export function PhotoLightbox({
@@ -47,17 +44,18 @@ export function PhotoLightbox({
     currentIndex,
     isOpen,
     onClose,
-    onNavigate,
-    currentAlbum,
-    albumMetadata
+    onNavigate
 }: PhotoLightboxProps) {
     const [isImageLoading, setIsImageLoading] = useState(true);
-    const photo = photos[currentIndex];
-
-    // Reset loading state when photo changes
-    useEffect(() => {
+    const [prevIndex, setPrevIndex] = useState(currentIndex);
+    
+    // Reset loading state when photo changes (derived state pattern)
+    if (currentIndex !== prevIndex) {
+        setPrevIndex(currentIndex);
         setIsImageLoading(true);
-    }, [currentIndex]);
+    }
+    
+    const photo = photos[currentIndex];
 
     // Keyboard navigation
     useEffect(() => {

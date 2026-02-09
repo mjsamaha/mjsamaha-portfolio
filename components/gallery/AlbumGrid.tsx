@@ -37,8 +37,7 @@ function AlbumCover({ id }: { id: AlbumCategory }) {
 export function AlbumGrid({
     albums,
     selectedAlbum,
-    onAlbumSelect,
-    currentPhotoCount
+    onAlbumSelect
 }: AlbumGridProps) {
 
     return (

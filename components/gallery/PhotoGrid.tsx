@@ -1,7 +1,6 @@
 "use client";
 
 import { Photo, AlbumCategory } from "@/src/content/photos";
-import { cn } from "@/lib/utils";
 import { Card } from "@/components/ui/card";
 import { motion, AnimatePresence } from "framer-motion";
 import { MapPin } from "lucide-react";
