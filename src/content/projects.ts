@@ -128,7 +128,7 @@ export const projects = [
     statusColor: "bg-yellow-100 text-yellow-800 dark:bg-yellow-900/30 dark:text-yellow-500 ring-yellow-600/20",
     tech: ["Next.js", "ShadCN/UI", "PostgreSQL", "Multi-Tenant", "OAuth2"],
     href: "/projects/signalsmaster",
-    repoUrl: "https://github.com/mjsamaha/signalsmaster",
+    repoUrl: "https://github.com/mjsamaha/oaksignal-signalsmaster",
     problem: "Fragmented knowledge management and inconsistent training delivery across cadet units.",
     problemDomain: {
       headline: "The Challenge: Fragmented & Inconsistent Training",
@@ -233,7 +233,7 @@ export const projects = [
     statusColor: "bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-400 ring-blue-600/20",
     tech: ["Multi-Tenant", "Inventory Tracking", "Audit Logging", "Role-Based Access"],
     href: "/projects/quartermaster",
-    repoUrl: "https://github.com/mjsamaha/quartermaster",
+    repoUrl: "https://github.com/mjsamaha",
     problem: "Poor inventory visibility and reliance on paper tracking leads to lost equipment and lack of accountability.",
     problemDomain: {
       headline: "The Challenge: Logistics & Accountability",
