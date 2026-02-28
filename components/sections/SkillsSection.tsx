@@ -1,13 +1,50 @@
 "use client";
 
 import { useRef } from "react";
-import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
-import { Progress } from "@/components/ui/progress";
-import { skills } from "@/src/content/skills";
+import { IconCloud } from "@/components/ui/icon-cloud";
 import { gsap, useGSAP } from "@/lib/gsap-utils";
+
+import { Badge } from "@/components/ui/badge";
+
+const skillsData = [
+  {
+    category: "Languages & Frameworks",
+    skills: ["TypeScript", "Java", "Angular", "Next.js", "Spring Boot"],
+  },
+  {
+    category: "Databases & Cloud",
+    skills: ["PostgreSQL", "MongoDB", "AWS"],
+  },
+  {
+    category: "DevOps",
+    skills: ["Docker", "GitHub", "GitHub Actions", "Cpanel"],
+  },
+  {
+    category: "Supporting Tools",
+    skills: ["Clerk", "Vercel", "Postman", "JUnit 5", "Jira", "Linear"],
+  },
+];
+
+const slugs = [
+  "angular",
+  "nextdotjs",
+  "springboot",
+  "typescript",
+  "postgresql",
+  "mongodb",
+  "docker",
+  "amazonaws",
+  "github",
+  "githubactions",
+  "cpanel",
+];
 
 export default function SkillsSection() {
   const containerRef = useRef<HTMLDivElement>(null);
+
+  const images = slugs.map(
+    (slug) => `https://cdn.simpleicons.org/${slug}/${slug}`
+  );
 
   useGSAP(() => {
     // Header reveal
@@ -26,31 +63,43 @@ export default function SkillsSection() {
       }
     );
 
-    // Cards and Progress Bars timeline
+    // Icon Cloud reveal
+    gsap.fromTo(
+      ".icon-cloud-container",
+      { opacity: 0, scale: 0.9, y: 40 },
+      {
+        opacity: 1,
+        y: 0,
+        scale: 1,
+        duration: 1,
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: ".icon-cloud-container",
+          start: "top 85%",
+          once: true,
+        },
+      }
+    );
+
+    // Skills List Stagger Reveal
     const tl = gsap.timeline({
       scrollTrigger: {
-        trigger: ".skills-grid",
+        trigger: ".skills-list-container",
         start: "top 85%",
         once: true,
       },
       defaults: { ease: "power2.out" },
     });
 
-    // 1. Reveal cards staggered
     tl.fromTo(
-      ".skill-card",
-      { opacity: 0, y: 40 },
-      { opacity: 1, y: 0, duration: 0.6, stagger: 0.15 }
-    );
-
-    // 2. Animate all progress bars growing to their set widths
-    // We select the internal primitive created by Radix inside the Progress component
-    // radix-progress-indicator is the class we need to target to animate the width/transform
-    tl.fromTo(
-      ".skill-card [data-state]",
-      { scaleX: 0, transformOrigin: "left" },
-      { scaleX: 1, duration: 1, ease: "power3.out", stagger: 0.05 },
-      "-=0.4"
+      ".skill-category-title",
+      { opacity: 0, x: -20 },
+      { opacity: 1, x: 0, duration: 0.5, stagger: 0.1 }
+    ).fromTo(
+      ".skill-badge",
+      { opacity: 0, scale: 0.8, y: 15 },
+      { opacity: 1, scale: 1, y: 0, duration: 0.4, stagger: 0.05 },
+      "-=0.3"
     );
   }, { scope: containerRef });
 
@@ -64,29 +113,35 @@ export default function SkillsSection() {
           </p>
         </div>
 
-        <div className="skills-grid grid grid-cols-1 md:grid-cols-2 gap-6">
-          {skills.map((category) => (
-            <div key={category.category} className="skill-card opacity-0">
-              <Card className="h-full hover:shadow-md transition-shadow duration-200">
-                <CardHeader>
-                  <CardTitle>{category.category}</CardTitle>
-                </CardHeader>
-                <CardContent className="space-y-6">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+          {/* Left Side: Skills Badges */}
+          <div className="skills-list-container space-y-8 order-2 lg:order-1">
+            {skillsData.map((category) => (
+              <div key={category.category} className="space-y-4">
+                <h3 className="skill-category-title opacity-0 text-xl font-semibold tracking-tight">
+                  {category.category}
+                </h3>
+                <div className="flex flex-wrap gap-2">
                   {category.skills.map((skill) => (
-                    <div key={skill.name} className="space-y-2 group">
-                      <div className="flex justify-between text-sm">
-                        <span className="font-medium group-hover:text-primary transition-colors">
-                          {skill.name}
-                        </span>
-                        <span className="text-muted-foreground">{skill.level}%</span>
-                      </div>
-                      <Progress value={skill.level ?? 0} className="h-2" />
-                    </div>
+                    <Badge
+                      key={skill}
+                      variant="secondary"
+                      className="skill-badge opacity-0 text-sm py-1 px-3 hover:bg-primary hover:text-primary-foreground transition-all duration-300 cursor-default"
+                    >
+                      {skill}
+                    </Badge>
                   ))}
-                </CardContent>
-              </Card>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {/* Right Side: Icon Cloud */}
+          <div className="icon-cloud-container opacity-0 mx-auto flex items-center justify-center order-1 lg:order-2 w-full">
+            <div className="relative flex size-full max-w-lg items-center justify-center overflow-hidden rounded-2xl bg-background/50 backdrop-blur-xl border border-border/50 p-8 shadow-sm">
+              <IconCloud images={images} />
             </div>
-          ))}
+          </div>
         </div>
       </div>
     </section>

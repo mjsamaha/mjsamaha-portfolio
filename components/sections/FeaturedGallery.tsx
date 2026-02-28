@@ -1,19 +1,20 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ChevronLeft, ChevronRight, ExternalLink } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
-import { fadeInUp } from "@/lib/animations";
 import { getFeaturedPhotos } from "@/src/content/photos";
+import { gsap, useGSAP } from "@/lib/gsap-utils";
 
 export default function FeaturedGallery() {
+  const containerRef = useRef<HTMLDivElement>(null);
   const featuredPhotos = getFeaturedPhotos();
 
   // Map to the format expected by the gallery for display
   const galleryPhotos = featuredPhotos.map(photo => ({
-    src: photo.fullSize, // Using fullSize as it contains the web-accessible path
+    src: photo.fullSize,
     alt: photo.alt,
     caption: photo.commonName,
     id: photo.id
@@ -21,6 +22,26 @@ export default function FeaturedGallery() {
 
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
+
+  useGSAP(() => {
+    // Structural reveal on scroll
+    gsap.fromTo(
+      ".gallery-header, .gallery-viewer",
+      { opacity: 0, y: 30 },
+      {
+        opacity: 1,
+        y: 0,
+        duration: 0.8,
+        stagger: 0.2,
+        ease: "power2.out",
+        scrollTrigger: {
+          trigger: containerRef.current,
+          start: "top 80%",
+          once: true,
+        },
+      }
+    );
+  }, { scope: containerRef });
 
   useEffect(() => {
     if (isPaused || galleryPhotos.length === 0) return;
@@ -43,19 +64,13 @@ export default function FeaturedGallery() {
   };
 
   if (galleryPhotos.length === 0) {
-    return null; // Don't render if no photos
+    return null;
   }
 
   return (
-    <section className="py-24 bg-background">
+    <section ref={containerRef} className="py-24 bg-background">
       <div className="container mx-auto px-4 max-w-6xl">
-        <motion.div
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-          variants={fadeInUp}
-          className="flex flex-col md:flex-row items-center justify-between mb-12 gap-6"
-        >
+        <div className="gallery-header opacity-0 flex flex-col md:flex-row items-center justify-between mb-12 gap-6">
           <div>
             <h2 className="text-3xl font-bold tracking-tight mb-2">Featured Photography</h2>
             <p className="text-muted-foreground text-lg">Capturing moments in nature</p>
@@ -71,13 +86,14 @@ export default function FeaturedGallery() {
               </Link>
             </Button>
           </div>
-        </motion.div>
+        </div>
 
         <div
-          className="relative aspect-video w-full rounded-xl overflow-hidden shadow-2xl bg-muted"
+          className="gallery-viewer opacity-0 relative aspect-video w-full rounded-xl overflow-hidden shadow-2xl bg-muted"
           onMouseEnter={() => setIsPaused(true)}
           onMouseLeave={() => setIsPaused(false)}
         >
+          {/* Note: Keeping Framer Motion here temporarily for the image crossfade logic as instructed by plan (micro-interactions vs macro layout) */}
           <AnimatePresence mode="wait">
             <motion.img
               key={galleryPhotos[currentIndex].id}
