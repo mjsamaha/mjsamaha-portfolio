@@ -3,29 +3,33 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { motion } from "framer-motion";
 import { staggerGrid, fadeInUp } from "@/lib/animations";
-import { TechnicalDetails } from "@/src/content/projects";
-import { Layers, Database, Shield, Server, HardDrive, Key } from "lucide-react";
+import { Project } from "@/src/content/projects";
+import { Layers, Database, Shield, Server, HardDrive, Key, Cloud, type LucideIcon } from "lucide-react";
+
+type TechnicalDetails = NonNullable<Project["technicalDetails"]>;
 
 interface TechStackShowcaseProps {
     technicalDetails: TechnicalDetails;
 }
 
-const iconMap = {
+const iconMap: Record<string, LucideIcon> = {
     frontend: Layers,
     backend: Server,
     database: Database,
     auth: Key,
     storage: HardDrive,
     security: Shield,
+    infrastructure: Cloud,
 };
 
-const labelMap = {
+const labelMap: Record<string, string> = {
     frontend: "Frontend",
     backend: "Backend",
     database: "Database",
     auth: "Authentication",
     storage: "Storage",
     security: "Security",
+    infrastructure: "Infrastructure",
 };
 
 export function TechStackShowcase({ technicalDetails }: TechStackShowcaseProps) {

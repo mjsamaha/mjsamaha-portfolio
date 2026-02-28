@@ -53,9 +53,9 @@ export function ProjectHero({ project }: ProjectHeroProps) {
 
             {/* CTA Buttons */}
             <div className="ph-anim opacity-0 flex flex-col sm:flex-row gap-4">
-                {project.liveUrl && (
+                {project.demoUrl && (
                     <Button asChild size="lg" className="gap-2">
-                        <Link href={project.liveUrl} target="_blank">
+                        <Link href={project.demoUrl} target="_blank">
                             <ExternalLink className="w-4 h-4" />
                             View Live Demo
                         </Link>

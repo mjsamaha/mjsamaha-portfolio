@@ -52,9 +52,11 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
 
         <ProjectDetails project={project} />
 
-        <div className="max-w-5xl mx-auto">
-          <TechStackShowcase technicalDetails={project.technicalDetails} />
-        </div>
+        {project.technicalDetails && (
+          <div className="max-w-5xl mx-auto">
+            <TechStackShowcase technicalDetails={project.technicalDetails} />
+          </div>
+        )}
 
         <div className="pt-12 border-t">
           <BackToProjects className="py-0" />
