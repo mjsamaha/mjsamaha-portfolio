@@ -1,44 +1,72 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { useRef } from "react";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
 import { skills } from "@/src/content/skills";
-import { useEffect, useState } from "react";
-import { fadeIn, staggerContainer } from "@/lib/animations";
-
-// Component to animate progress bar on mount
-const AnimatedProgress = ({ level }: { level: number }) => {
-  const [progress, setProgress] = useState(0);
-
-  useEffect(() => {
-    const timer = setTimeout(() => setProgress(level), 500);
-    return () => clearTimeout(timer);
-  }, [level]);
-
-  return <Progress value={progress} className="h-2" />;
-};
+import { gsap, useGSAP } from "@/lib/gsap-utils";
 
 export default function SkillsSection() {
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  useGSAP(() => {
+    // Header reveal
+    gsap.fromTo(
+      ".skills-header",
+      { opacity: 0, y: 30 },
+      {
+        opacity: 1,
+        y: 0,
+        duration: 0.8,
+        scrollTrigger: {
+          trigger: ".skills-header",
+          start: "top 85%",
+          once: true,
+        },
+      }
+    );
+
+    // Cards and Progress Bars timeline
+    const tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: ".skills-grid",
+        start: "top 85%",
+        once: true,
+      },
+      defaults: { ease: "power2.out" },
+    });
+
+    // 1. Reveal cards staggered
+    tl.fromTo(
+      ".skill-card",
+      { opacity: 0, y: 40 },
+      { opacity: 1, y: 0, duration: 0.6, stagger: 0.15 }
+    );
+
+    // 2. Animate all progress bars growing to their set widths
+    // We select the internal primitive created by Radix inside the Progress component
+    // radix-progress-indicator is the class we need to target to animate the width/transform
+    tl.fromTo(
+      ".skill-card [data-state]",
+      { scaleX: 0, transformOrigin: "left" },
+      { scaleX: 1, duration: 1, ease: "power3.out", stagger: 0.05 },
+      "-=0.4"
+    );
+  }, { scope: containerRef });
+
   return (
-    <section className="container max-w-4xl mx-auto px-4 py-16">
-      <motion.div
-        initial="initial"
-        whileInView="animate"
-        viewport={{ once: true, margin: "-100px" }}
-        variants={staggerContainer}
-        className="space-y-12"
-      >
-        <motion.div variants={fadeIn} className="text-center space-y-4">
+    <section ref={containerRef} className="container max-w-4xl mx-auto px-4 py-16">
+      <div className="space-y-12">
+        <div className="skills-header opacity-0 text-center space-y-4">
           <h2 className="text-3xl font-bold tracking-tight">Skills & Technologies</h2>
           <p className="text-muted-foreground max-w-2xl mx-auto">
             A comprehensive overview of my technical expertise and proficiency
           </p>
-        </motion.div>
+        </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div className="skills-grid grid grid-cols-1 md:grid-cols-2 gap-6">
           {skills.map((category) => (
-            <motion.div key={category.category} variants={fadeIn}>
+            <div key={category.category} className="skill-card opacity-0">
               <Card className="h-full hover:shadow-md transition-shadow duration-200">
                 <CardHeader>
                   <CardTitle>{category.category}</CardTitle>
@@ -52,15 +80,15 @@ export default function SkillsSection() {
                         </span>
                         <span className="text-muted-foreground">{skill.level}%</span>
                       </div>
-                      <AnimatedProgress level={skill.level ?? 0} />
+                      <Progress value={skill.level ?? 0} className="h-2" />
                     </div>
                   ))}
                 </CardContent>
               </Card>
-            </motion.div>
+            </div>
           ))}
         </div>
-      </motion.div>
+      </div>
     </section>
   );
 }
