@@ -61,7 +61,7 @@ export default function ContactForm() {
   }
 
   return (
-    <section id="contact" className="py-24 bg-background">
+    <section id="contact" className="py-24 bg-(--bg-primary)">
       <div className="container mx-auto px-4 max-w-2xl">
         <motion.div
           initial="hidden"
@@ -70,13 +70,13 @@ export default function ContactForm() {
           variants={fadeInUp}
         >
           <div className="mb-10 text-center space-y-4">
-             <h2 className="text-3xl font-bold tracking-tight">Get in Touch</h2>
-             <p className="text-muted-foreground text-lg">
+             <h2 className="text-3xl font-bold tracking-tight text-(--text-primary)">Get in Touch</h2>
+             <p className="text-(--text-secondary) text-lg">
                 Have a project in mind or just want to chat? Send me a message below.
              </p>
           </div>
 
-          <div className="bg-card border rounded-xl p-6 md:p-8 shadow-sm">
+           <div className="bg-(--bg-secondary) border border-(--border-default) rounded-xl p-6 md:p-8 shadow-(--shadow-elevated)">
               <AnimatePresence mode="wait">
                 {isSuccess ? (
                     <motion.div
@@ -86,11 +86,18 @@ export default function ContactForm() {
                     exit={{ opacity: 0, scale: 0.95 }}
                     className="flex flex-col items-center justify-center py-12 text-center"
                     >
-                    <div className="rounded-full bg-green-100 dark:bg-green-900/30 p-3 mb-4 text-green-600 dark:text-green-400">
+                    <div
+                      className="rounded-full p-3 mb-4"
+                      style={{
+                        backgroundColor: "var(--status-active-bg)",
+                        color: "var(--status-active-text)",
+                        boxShadow: "inset 0 0 0 1px var(--status-active-ring)",
+                      }}
+                    >
                         <CheckCircle2 className="w-12 h-12" />
                     </div>
-                    <h3 className="text-2xl font-semibold mb-2">Message Sent!</h3>
-                    <p className="text-muted-foreground max-w-xs mx-auto">
+                    <h3 className="text-2xl font-semibold mb-2 text-(--text-primary)">Message Sent!</h3>
+                    <p className="text-(--text-secondary) max-w-xs mx-auto">
                         Thanks for reaching out. I&apos;ll get back to you as soon as possible.
                     </p>
                     <Button 

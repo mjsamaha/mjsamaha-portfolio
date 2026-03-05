@@ -23,8 +23,8 @@ export function ProjectDetails({ project }: ProjectDetailsProps) {
                     variants={fadeInUp}
                     className="max-w-3xl prose prose-neutral dark:prose-invert"
                 >
-                    <h3 className="text-2xl font-bold mb-4">Overview</h3>
-                    <p className="text-lg leading-relaxed text-muted-foreground">
+                        <h3 className="text-2xl font-bold mb-4 text-(--text-primary)">Overview</h3>
+                        <p className="text-lg leading-relaxed text-(--text-secondary)">
                         {project.detailedOverview}
                     </p>
                 </motion.div>
@@ -40,7 +40,7 @@ export function ProjectDetails({ project }: ProjectDetailsProps) {
             >
                 {/* Problem Card */}
                 <motion.div variants={fadeInUp} className="h-full">
-                    <Card className="h-full bg-background/50 backdrop-blur border-destructive/20">
+                    <Card className="h-full bg-(--bg-elevated-60) backdrop-blur border-(--border-default)">
                         <CardHeader>
                             <div className="w-10 h-10 rounded-lg bg-destructive/10 flex items-center justify-center mb-4 text-destructive">
                                 <AlertCircle className="w-5 h-5" />
@@ -48,11 +48,11 @@ export function ProjectDetails({ project }: ProjectDetailsProps) {
                             <CardTitle className="text-lg">The Challenge</CardTitle>
                         </CardHeader>
                         <CardContent className="space-y-4">
-                            <p className="text-muted-foreground">
+                            <p className="text-(--text-secondary)">
                                 {project.problem}
                             </p>
                             {project.problemDomain && (
-                                <ul className="list-disc pl-5 mt-2 space-y-2 text-sm text-muted-foreground">
+                                <ul className="list-disc pl-5 mt-2 space-y-2 text-sm text-(--text-muted)">
                                     {project.problemDomain.points.slice(0, 3).map((point: string, i: number) => (
                                         <li key={i}>{point}</li>
                                     ))}
@@ -64,18 +64,18 @@ export function ProjectDetails({ project }: ProjectDetailsProps) {
 
                 {/* Solution Card */}
                 <motion.div variants={fadeInUp} className="h-full">
-                    <Card className="h-full bg-background/50 backdrop-blur border-primary/20">
+                    <Card className="h-full bg-(--bg-elevated-60) backdrop-blur border-(--border-default)">
                         <CardHeader>
-                            <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center mb-4 text-primary">
+                            <div className="w-10 h-10 rounded-lg bg-(--state-hover-overlay) flex items-center justify-center mb-4 text-(--text-accent)">
                                 <Lightbulb className="w-5 h-5" />
                             </div>
                             <CardTitle className="text-lg">The Solution</CardTitle>
                         </CardHeader>
                         <CardContent className="space-y-4">
-                            <p className="text-muted-foreground">
+                            <p className="text-(--text-secondary)">
                                 {project.solution.headline}
                             </p>
-                            <ul className="list-disc pl-5 mt-2 space-y-2 text-sm text-muted-foreground">
+                            <ul className="list-disc pl-5 mt-2 space-y-2 text-sm text-(--text-muted)">
                                 {project.solution.points.slice(0, 3).map((point: string, i: number) => (
                                     <li key={i}>{point}</li>
                                 ))}
@@ -86,15 +86,15 @@ export function ProjectDetails({ project }: ProjectDetailsProps) {
 
                 {/* Impact/Outcome Card */}
                 <motion.div variants={fadeInUp} className="h-full">
-                    <Card className="h-full bg-background/50 backdrop-blur border-green-500/20">
+                    <Card className="h-full bg-(--bg-elevated-60) backdrop-blur border-(--border-default)">
                         <CardHeader>
-                            <div className="w-10 h-10 rounded-lg bg-green-500/10 flex items-center justify-center mb-4 text-green-500">
+                            <div className="w-10 h-10 rounded-lg bg-(--status-active-bg) flex items-center justify-center mb-4 text-(--status-active-text)">
                                 <TrendingUp className="w-5 h-5" />
                             </div>
                             <CardTitle className="text-lg">The Impact</CardTitle>
                         </CardHeader>
                         <CardContent>
-                            <p className="text-muted-foreground">
+                            <p className="text-(--text-secondary)">
                                 {project.outcome}
                             </p>
                             <div className="mt-6 flex flex-wrap gap-2">
@@ -116,16 +116,16 @@ export function ProjectDetails({ project }: ProjectDetailsProps) {
                     whileInView="visible"
                     viewport={{ once: true }}
                     variants={staggerContainer}
-                    className="grid grid-cols-2 md:grid-cols-4 gap-4 pt-8 border-t"
+                    className="grid grid-cols-2 md:grid-cols-4 gap-4 pt-8 border-t border-(--border-default)"
                 >
                     {project.metrics.map((metric: { label: string; value: string }, i: number) => (
                         <motion.div key={i} variants={fadeInUp}>
-                            <Card className="bg-secondary/30 border-none">
+                            <Card className="bg-(--bg-elevated-60) border-(--border-soft)">
                                 <CardContent className="p-6 text-center">
-                                    <p className="text-sm text-muted-foreground mb-1 font-medium tracking-wide uppercase">
+                                    <p className="text-sm text-(--text-muted) mb-1 font-medium tracking-wide uppercase">
                                         {metric.label}
                                     </p>
-                                    <p className="text-2xl md:text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-br from-foreground to-foreground/70">
+                                    <p className="text-2xl md:text-3xl font-bold bg-clip-text text-transparent bg-linear-to-br from-foreground to-foreground/70">
                                         {metric.value}
                                     </p>
                                 </CardContent>

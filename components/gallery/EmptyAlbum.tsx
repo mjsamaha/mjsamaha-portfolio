@@ -37,7 +37,7 @@ export function EmptyAlbum({ album, onBackToAlbums }: EmptyAlbumProps) {
         >
             <Card className="max-w-md text-center p-12 bg-card border-border shadow-sm">
                 {/* Album Icon */}
-                {createElement(icon, { className: "mx-auto h-16 w-16 text-muted-foreground mb-4" })}
+                {createElement(icon, { className: "mx-auto h-16 w-16 text-(--text-muted) mb-4" })}
 
                 {/* Title */}
                 <h3 className="text-xl font-semibold mb-2 font-heading">
@@ -45,7 +45,7 @@ export function EmptyAlbum({ album, onBackToAlbums }: EmptyAlbumProps) {
                 </h3>
 
                 {/* Description */}
-                <p className="text-muted-foreground mb-6">
+                <p className="text-(--text-secondary) mb-6">
                     Check back soon for new additions to this collection.
                 </p>
 

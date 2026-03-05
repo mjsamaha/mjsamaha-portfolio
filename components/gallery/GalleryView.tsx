@@ -50,10 +50,10 @@ export function GalleryView() {
 
             {/* Hero Section */}
             <div className="text-center mb-16">
-                <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-4 font-heading">
+                <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-4 font-heading text-(--text-primary)">
                     Bird Photography Gallery
                 </h1>
-                <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
+                <p className="text-(--text-secondary) text-lg max-w-2xl mx-auto">
                     A collection of {photos.length} bird photographs captured in Southern Ontario
                 </p>
             </div>

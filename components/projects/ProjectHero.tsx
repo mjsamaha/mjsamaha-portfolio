@@ -31,7 +31,7 @@ export function ProjectHero({ project }: ProjectHeroProps) {
     return (
         <div ref={containerRef} className="max-w-5xl mx-auto py-12 md:py-20 px-4 md:px-0">
             {/* Metadata Row */}
-            <div className="ph-anim opacity-0 flex flex-wrap items-center gap-2 text-sm text-muted-foreground mb-6">
+            <div className="ph-anim opacity-0 flex flex-wrap items-center gap-2 text-sm text-(--text-muted) mb-6">
                 <span className={project.statusColor + " px-2 py-0.5 rounded-full text-xs font-medium border border-current/20"}>
                     {project.status}
                 </span>
@@ -42,12 +42,12 @@ export function ProjectHero({ project }: ProjectHeroProps) {
             </div>
 
             {/* Title */}
-            <h1 className="ph-anim opacity-0 text-4xl md:text-6xl font-bold tracking-tight mb-6 bg-gradient-to-r from-foreground to-foreground/60 bg-clip-text text-transparent">
+            <h1 className="ph-anim opacity-0 text-4xl md:text-6xl font-bold tracking-tight mb-6 bg-linear-to-r from-foreground to-foreground/60 bg-clip-text text-transparent">
                 {project.title}
             </h1>
 
             {/* Description */}
-            <p className="ph-anim opacity-0 text-xl md:text-2xl text-muted-foreground mb-10 max-w-3xl leading-relaxed">
+            <p className="ph-anim opacity-0 text-xl md:text-2xl text-(--text-secondary) mb-10 max-w-3xl leading-relaxed">
                 {project.description}
             </p>
 

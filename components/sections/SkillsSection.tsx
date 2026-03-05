@@ -107,8 +107,8 @@ export default function SkillsSection() {
     <section ref={containerRef} className="container max-w-4xl mx-auto px-4 py-16">
       <div className="space-y-12">
         <div className="skills-header opacity-0 text-center space-y-4">
-          <h2 className="text-3xl font-bold tracking-tight">Skills & Technologies</h2>
-          <p className="text-muted-foreground max-w-2xl mx-auto">
+          <h2 className="text-3xl font-bold tracking-tight text-(--text-primary)">Skills & Technologies</h2>
+          <p className="text-(--text-secondary) max-w-2xl mx-auto">
             A comprehensive overview of my technical expertise and proficiency
           </p>
         </div>
@@ -118,7 +118,7 @@ export default function SkillsSection() {
           <div className="skills-list-container space-y-8 order-2 lg:order-1">
             {skillsData.map((category) => (
               <div key={category.category} className="space-y-4">
-                <h3 className="skill-category-title opacity-0 text-xl font-semibold tracking-tight">
+                <h3 className="skill-category-title opacity-0 text-xl font-semibold tracking-tight text-(--text-primary)">
                   {category.category}
                 </h3>
                 <div className="flex flex-wrap gap-2">
@@ -126,7 +126,7 @@ export default function SkillsSection() {
                     <Badge
                       key={skill}
                       variant="secondary"
-                      className="skill-badge opacity-0 text-sm py-1 px-3 hover:bg-primary hover:text-primary-foreground transition-all duration-300 cursor-default"
+                      className="skill-badge opacity-0 text-sm py-1 px-3 bg-(--bg-elevated-60) text-(--text-secondary) border border-(--border-soft) hover:bg-(--state-hover-overlay) hover:text-(--text-primary) transition-all duration-300 cursor-default"
                     >
                       {skill}
                     </Badge>
@@ -138,7 +138,7 @@ export default function SkillsSection() {
 
           {/* Right Side: Icon Cloud */}
           <div className="icon-cloud-container opacity-0 mx-auto flex items-center justify-center order-1 lg:order-2 w-full">
-            <div className="relative flex size-full max-w-lg items-center justify-center overflow-hidden rounded-2xl bg-background/50 backdrop-blur-xl border border-border/50 p-8 shadow-sm">
+            <div className="relative flex size-full max-w-lg items-center justify-center overflow-hidden rounded-2xl bg-(--bg-elevated-60) backdrop-blur-xl border border-(--border-default) p-8 shadow-(--shadow-elevated)">
               <IconCloud images={images} />
             </div>
           </div>

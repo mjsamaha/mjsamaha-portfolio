@@ -35,7 +35,7 @@ const itemVariants = {
 export function PhotoGrid({ photos, onPhotoClick }: PhotoGridProps) {
     if (photos.length === 0) {
         return (
-            <div className="text-center py-20 text-muted-foreground">
+            <div className="text-center py-20 text-(--text-secondary)">
                 <p>No photos found in this album.</p>
             </div>
         );
@@ -57,7 +57,7 @@ export function PhotoGrid({ photos, onPhotoClick }: PhotoGridProps) {
                         className="w-full"
                     >
                         <Card
-                            className="group relative aspect-square overflow-hidden cursor-pointer border-border bg-card ring-offset-background transition-all hover:ring-2 hover:ring-primary focus-visible:outline-none focus:ring-2 focus:ring-primary"
+                            className="group relative aspect-square overflow-hidden cursor-pointer border-(--border-default) bg-(--bg-secondary) ring-offset-(--bg-primary) transition-all hover:ring-2 hover:ring-(--focus-ring) focus-visible:outline-none focus:ring-2 focus:ring-(--focus-ring)"
                             onClick={() => onPhotoClick(photo, index)}
                             onKeyDown={(e) => {
                                 if (e.key === 'Enter' || e.key === ' ') {
@@ -80,7 +80,7 @@ export function PhotoGrid({ photos, onPhotoClick }: PhotoGridProps) {
                             />
 
                             {/* Hover Overlay */}
-                            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-4">
+                            <div className="absolute inset-0 bg-linear-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-4">
                                 <h3 className="text-white font-medium text-lg leading-tight translate-y-2 group-hover:translate-y-0 transition-transform duration-300">
                                     {photo.commonName}
                                 </h3>

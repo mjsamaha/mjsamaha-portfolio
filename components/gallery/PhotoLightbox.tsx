@@ -75,17 +75,17 @@ export function PhotoLightbox({
 
     return (
         <Dialog open={isOpen} onOpenChange={(open) => !open && onClose()}>
-            <DialogContent className="max-w-[95vw] lg:max-w-7xl h-[90vh] p-0 gap-0 overflow-hidden bg-background/95 backdrop-blur-xl border-border/50 [&>button]:hidden">
+            <DialogContent className="max-w-[95vw] lg:max-w-7xl h-[90vh] p-0 gap-0 overflow-hidden bg-(--bg-elevated-70) backdrop-blur-xl border-(--border-default) [&>button]:hidden">
                 <div className="flex flex-col lg:flex-row h-full w-full">
 
                     {/* Left Side: Image Viewer */}
-                    <div className="relative flex-1 bg-black/5 lg:bg-black/20 flex items-center justify-center p-4 lg:p-8 min-h-[50vh] lg:min-h-full overflow-hidden">
+                    <div className="relative flex-1 bg-(--bg-tertiary) flex items-center justify-center p-4 lg:p-8 min-h-[50vh] lg:min-h-full overflow-hidden">
 
                         {/* Navigation Buttons (Desktop: Internal, Mobile: Hidden/Swipe) */}
                         <Button
                             variant="ghost"
                             size="icon"
-                            className="absolute left-4 z-20 hidden lg:flex h-12 w-12 rounded-full bg-background/20 hover:bg-background/40 backdrop-blur-sm text-foreground transition-all disabled:opacity-0"
+                            className="absolute left-4 z-20 hidden lg:flex h-12 w-12 rounded-full bg-(--bg-elevated-70) hover:bg-(--state-hover-overlay) backdrop-blur-sm text-(--text-primary) transition-all disabled:opacity-0 border border-(--border-soft)"
                             onClick={() => onNavigate('prev')}
                             disabled={currentIndex === 0}
                         >
@@ -96,7 +96,7 @@ export function PhotoLightbox({
                         <Button
                             variant="ghost"
                             size="icon"
-                            className="absolute right-4 z-20 hidden lg:flex h-12 w-12 rounded-full bg-background/20 hover:bg-background/40 backdrop-blur-sm text-foreground transition-all disabled:opacity-0"
+                            className="absolute right-4 z-20 hidden lg:flex h-12 w-12 rounded-full bg-(--bg-elevated-70) hover:bg-(--state-hover-overlay) backdrop-blur-sm text-(--text-primary) transition-all disabled:opacity-0 border border-(--border-soft)"
                             onClick={() => onNavigate('next')}
                             disabled={currentIndex === photos.length - 1}
                         >
@@ -118,7 +118,7 @@ export function PhotoLightbox({
                                     {/* Fallback / Loading State */}
                                     {isImageLoading && (
                                         <div className="absolute inset-0 flex items-center justify-center">
-                                            <div className="w-10 h-10 border-4 border-primary/30 border-t-primary rounded-full animate-spin" />
+                                            <div className="w-10 h-10 border-4 border-(--state-hover-overlay) border-t-(--accent-primary) rounded-full animate-spin" />
                                         </div>
                                     )}
 
@@ -163,15 +163,15 @@ export function PhotoLightbox({
                     </div>
 
                     {/* Right Side: Metadata Panel */}
-                    <div className="w-full lg:w-[380px] xl:w-[420px] flex flex-col border-t lg:border-t-0 lg:border-l border-border bg-background lg:h-full">
+                    <div className="w-full lg:w-95 xl:w-105 flex flex-col border-t lg:border-t-0 lg:border-l border-(--border-default) bg-(--bg-secondary) lg:h-full">
 
                         {/* Header / Custom Close */}
-                        <div className="flex items-center justify-between p-4 border-b border-border">
+                        <div className="flex items-center justify-between p-4 border-b border-(--border-default)">
                             <div className="flex items-center gap-2">
                                 <Badge variant="outline" className="text-xs font-normal">
                                     Gallery
                                 </Badge>
-                                <span className="text-xs text-muted-foreground">
+                                <span className="text-xs text-(--text-muted)">
                                     {currentIndex + 1} / {photos.length}
                                 </span>
                             </div>
@@ -189,20 +189,20 @@ export function PhotoLightbox({
                                 <DialogTitle className="text-2xl font-bold font-heading tracking-tight">
                                     {photo.commonName}
                                 </DialogTitle>
-                                <DialogDescription className="text-lg italic text-muted-foreground font-serif">
+                                <DialogDescription className="text-lg italic text-(--text-secondary) font-serif">
                                     {photo.scientificName}
                                 </DialogDescription>
                             </div>
 
                             {/* Location & Year */}
-                            <div className="flex flex-wrap gap-4 text-sm text-muted-foreground">
+                            <div className="flex flex-wrap gap-4 text-sm text-(--text-secondary)">
                                 {photo.location && (
                                     <div className="flex items-center gap-1.5">
-                                        <MapPin className="w-4 h-4 text-primary" />
+                                        <MapPin className="w-4 h-4 text-(--text-accent)" />
                                         <span>{photo.location}</span>
                                     </div>
                                 )}
-                                <div className="px-2 py-0.5 rounded-full bg-secondary/50 text-xs font-medium border border-border">
+                                <div className="px-2 py-0.5 rounded-full bg-(--bg-elevated-60) text-xs font-medium border border-(--border-soft)">
                                     {photo.year}
                                 </div>
                             </div>
@@ -225,13 +225,13 @@ export function PhotoLightbox({
                                     <AccordionContent>
                                         <div className="grid grid-cols-2 gap-4 py-2">
                                             <div className="space-y-1">
-                                                <span className="text-xs text-muted-foreground uppercase tracking-wider flex items-center gap-1">
+                                                <span className="text-xs text-(--text-muted) uppercase tracking-wider flex items-center gap-1">
                                                     <Camera className="w-3 h-3" /> Camera
                                                 </span>
                                                 <p className="text-sm font-medium truncate">{photo.camera || "Unknown"}</p>
                                             </div>
                                             <div className="space-y-1">
-                                                <span className="text-xs text-muted-foreground uppercase tracking-wider flex items-center gap-1">
+                                                <span className="text-xs text-(--text-muted) uppercase tracking-wider flex items-center gap-1">
                                                     <Maximize2 className="w-3 h-3" /> Lens
                                                 </span>
                                                 <p className="text-sm font-medium truncate" title={photo.lens}>{photo.lens || "Unknown"}</p>
@@ -240,25 +240,25 @@ export function PhotoLightbox({
                                             {photo.settings && (
                                                 <>
                                                     <div className="space-y-1">
-                                                        <span className="text-xs text-muted-foreground uppercase tracking-wider flex items-center gap-1">
+                                                        <span className="text-xs text-(--text-muted) uppercase tracking-wider flex items-center gap-1">
                                                             <Aperture className="w-3 h-3" /> Aperture
                                                         </span>
                                                         <p className="text-sm font-medium">{photo.settings.aperture || "-"}</p>
                                                     </div>
                                                     <div className="space-y-1">
-                                                        <span className="text-xs text-muted-foreground uppercase tracking-wider flex items-center gap-1">
+                                                        <span className="text-xs text-(--text-muted) uppercase tracking-wider flex items-center gap-1">
                                                             <Timer className="w-3 h-3" /> Shutter
                                                         </span>
                                                         <p className="text-sm font-medium">{photo.settings.shutterSpeed || "-"}</p>
                                                     </div>
                                                     <div className="space-y-1">
-                                                        <span className="text-xs text-muted-foreground uppercase tracking-wider flex items-center gap-1">
+                                                        <span className="text-xs text-(--text-muted) uppercase tracking-wider flex items-center gap-1">
                                                             ISO
                                                         </span>
                                                         <p className="text-sm font-medium">{photo.settings.iso || "-"}</p>
                                                     </div>
                                                     <div className="space-y-1">
-                                                        <span className="text-xs text-muted-foreground uppercase tracking-wider flex items-center gap-1">
+                                                        <span className="text-xs text-(--text-muted) uppercase tracking-wider flex items-center gap-1">
                                                             <Focus className="w-3 h-3" /> Focal Length
                                                         </span>
                                                         <p className="text-sm font-medium">{photo.settings.focalLength || "-"}</p>
@@ -272,8 +272,8 @@ export function PhotoLightbox({
                         </div>
 
                         {/* Footer / Keyboard Hint */}
-                        <div className="p-4 border-t border-border bg-muted/20 hidden lg:block">
-                            <div className="flex justify-between text-xs text-muted-foreground">
+                        <div className="p-4 border-t border-(--border-default) bg-(--bg-elevated-60) hidden lg:block">
+                            <div className="flex justify-between text-xs text-(--text-muted)">
                                 <span>← → Navigate</span>
                                 <span>ESC Close</span>
                             </div>

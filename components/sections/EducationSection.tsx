@@ -17,7 +17,7 @@ export function EducationSection() {
   return (
     <section className="space-y-6">
       <motion.h2
-        className="text-3xl font-bold tracking-tight"
+        className="text-3xl font-bold tracking-tight text-(--text-primary)"
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true }}
@@ -41,17 +41,17 @@ export function EducationSection() {
                 <div className="flex items-start justify-between">
                   <div className="space-y-1">
                     <CardTitle className="text-xl flex items-center gap-2">
-                      <GraduationCap className="h-5 w-5 text-primary" />
+                      <GraduationCap className="h-5 w-5 text-(--text-accent)" />
                       {edu.institution}
                     </CardTitle>
-                    <CardDescription className="text-base font-medium text-foreground">
+                    <CardDescription className="text-base font-medium text-(--text-primary)">
                       {edu.program}
                     </CardDescription>
                   </div>
                 </div>
               </CardHeader>
               <CardContent className="flex-1 flex flex-col gap-4">
-                <div className="flex flex-col gap-2 text-sm text-muted-foreground">
+                <div className="flex flex-col gap-2 text-sm text-(--text-muted)">
                   <div className="flex items-center gap-2">
                     <CalendarDays className="h-4 w-4" />
                     <span>
@@ -64,7 +64,7 @@ export function EducationSection() {
                   </div>
                 </div>
 
-                <p className="text-sm text-muted-foreground leading-relaxed flex-1">
+                <p className="text-sm text-(--text-secondary) leading-relaxed flex-1">
                   {edu.description}
                 </p>
 

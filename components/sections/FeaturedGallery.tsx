@@ -68,12 +68,12 @@ export default function FeaturedGallery() {
   }
 
   return (
-    <section ref={containerRef} className="py-24 bg-background">
+    <section ref={containerRef} className="py-24 bg-(--bg-primary)">
       <div className="container mx-auto px-4 max-w-6xl">
         <div className="gallery-header opacity-0 flex flex-col md:flex-row items-center justify-between mb-12 gap-6">
           <div>
-            <h2 className="text-3xl font-bold tracking-tight mb-2">Featured Photography</h2>
-            <p className="text-muted-foreground text-lg">Capturing moments in nature</p>
+            <h2 className="text-3xl font-bold tracking-tight mb-2 text-(--text-primary)">Featured Photography</h2>
+            <p className="text-(--text-secondary) text-lg">Capturing moments in nature</p>
           </div>
           <div className="flex gap-4">
             <Button asChild variant="outline">
@@ -89,7 +89,7 @@ export default function FeaturedGallery() {
         </div>
 
         <div
-          className="gallery-viewer opacity-0 relative aspect-video w-full rounded-xl overflow-hidden shadow-2xl bg-muted"
+          className="gallery-viewer opacity-0 relative aspect-video w-full rounded-xl overflow-hidden shadow-(--shadow-elevated) bg-(--bg-secondary) border border-(--border-default)"
           onMouseEnter={() => setIsPaused(true)}
           onMouseLeave={() => setIsPaused(false)}
         >
@@ -107,22 +107,22 @@ export default function FeaturedGallery() {
             />
           </AnimatePresence>
 
-          <div className="absolute inset-x-0 bottom-0 bg-black/50 p-4 backdrop-blur-sm">
-            <p className="text-white text-lg font-medium text-center">
+          <div className="absolute inset-x-0 bottom-0 p-4 backdrop-blur-sm bg-(--bg-elevated-70)">
+            <p className="text-(--text-primary) text-lg font-medium text-center">
               {galleryPhotos[currentIndex].caption}
             </p>
           </div>
 
           <button
             onClick={prevSlide}
-            className="absolute left-4 top-1/2 -translate-y-1/2 p-2 rounded-full bg-black/30 text-white hover:bg-black/50 transition-colors backdrop-blur-sm"
+            className="absolute left-4 top-1/2 -translate-y-1/2 p-2 rounded-full bg-(--bg-elevated-70) text-(--text-primary) hover:bg-(--state-hover-overlay) transition-colors backdrop-blur-sm border border-(--border-soft)"
           >
             <ChevronLeft className="w-8 h-8" />
           </button>
 
           <button
             onClick={nextSlide}
-            className="absolute right-4 top-1/2 -translate-y-1/2 p-2 rounded-full bg-black/30 text-white hover:bg-black/50 transition-colors backdrop-blur-sm"
+            className="absolute right-4 top-1/2 -translate-y-1/2 p-2 rounded-full bg-(--bg-elevated-70) text-(--text-primary) hover:bg-(--state-hover-overlay) transition-colors backdrop-blur-sm border border-(--border-soft)"
           >
             <ChevronRight className="w-8 h-8" />
           </button>
@@ -132,7 +132,7 @@ export default function FeaturedGallery() {
               <button
                 key={index}
                 onClick={() => setCurrentIndex(index)}
-                className={`w-2 h-2 rounded-full transition-all ${index === currentIndex ? "bg-white w-4" : "bg-white/50"
+                className={`w-2 h-2 rounded-full transition-all ${index === currentIndex ? "bg-(--text-primary) w-4" : "bg-(--text-muted)"
                   }`}
               />
             ))}

@@ -1,6 +1,5 @@
 import type { CSSProperties } from "react";
 import Link from "next/link";
-import { ThemeToggle } from "@/components/ThemeToggle";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import {
@@ -95,7 +94,6 @@ export default function ThemeVerificationPage() {
               </p>
             </div>
             <div className="flex items-center gap-3">
-              <ThemeToggle />
               <Button asChild variant="outline">
                 <Link href="/">Back to Portfolio</Link>
               </Button>

@@ -30,7 +30,7 @@ export default function AboutSection() {
   }, { scope: containerRef });
 
   return (
-    <section ref={containerRef} className="bg-background py-16 md:py-24">
+    <section ref={containerRef} className="bg-(--bg-primary) py-16 md:py-24">
       <div className="container max-w-4xl mx-auto px-4">
         <div className="flex flex-col md:flex-row items-center md:items-start gap-8 md:gap-12">
           {/* Avatar Placeholder - Optional */}
@@ -45,11 +45,11 @@ export default function AboutSection() {
               <AuroraText>Matthew Samaha</AuroraText>
             </h1>
 
-            <h2 className="opacity-0 text-xl md:text-2xl text-muted-foreground font-medium">
+            <h2 className="opacity-0 text-xl md:text-2xl text-(--text-secondary) font-medium">
               {aboutMe.tagline}
             </h2>
 
-            <p className="opacity-0 text-lg text-muted-foreground leading-relaxed">
+            <p className="opacity-0 text-lg text-(--text-secondary) leading-relaxed">
               {aboutMe.intro}
             </p>
 
@@ -58,7 +58,7 @@ export default function AboutSection() {
                 <Badge
                   key={index}
                   variant="secondary"
-                  className="px-4 py-2 text-sm"
+                  className="px-4 py-2 text-sm bg-(--bg-elevated-60) text-(--text-secondary) border border-(--border-soft)"
                 >
                   {highlight}
                 </Badge>

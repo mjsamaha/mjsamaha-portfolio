@@ -31,12 +31,12 @@ export function ProjectCard({ project }: ProjectCardProps) {
       transition={{ duration: 0.3 }}
       className="h-full"
     >
-      <Card className="h-full flex flex-col overflow-hidden hover:shadow-lg transition-shadow duration-300 border-slate-200 dark:border-slate-800 relative group">
+      <Card className="h-full flex flex-col overflow-hidden transition-shadow duration-300 border-(--border-default) relative group">
         
         {/* OakSignal Badge */}
         {isOakSignal && (
           <div className="absolute top-4 right-4 z-20">
-            <Badge className="bg-blue-600 hover:bg-blue-700 text-white shadow-sm gap-1 pl-1.5 border-none">
+            <Badge className="bg-(--accent-primary) hover:bg-(--accent-primary-hover) text-(--accent-foreground-strong) shadow-sm gap-1 pl-1.5 border-none">
               <Anchor className="w-3 h-3" />
               Part of OakSignal
             </Badge>
@@ -44,9 +44,16 @@ export function ProjectCard({ project }: ProjectCardProps) {
         )}
 
         {/* Thumbnail Area (Placeholder or Image) */}
-        <div className="relative h-48 bg-slate-100 dark:bg-slate-900 overflow-hidden border-b border-slate-100 dark:border-slate-800">
+        <div className="relative h-48 bg-(--bg-tertiary) overflow-hidden border-b border-(--border-soft)">
            {/* If we had images, we'd put Next/Image here. For now, solid color or pattern */}
-           <div className={`absolute inset-0 bg-linear-to-br ${isOakSignal ? 'from-blue-600/10 to-slate-900/10' : 'from-slate-200 to-slate-300 dark:from-slate-800 dark:to-slate-900'}`} />
+           <div
+             className="absolute inset-0"
+             style={{
+               backgroundImage: isOakSignal
+                 ? "linear-gradient(135deg, var(--state-hover-overlay), var(--bg-tertiary))"
+                 : "linear-gradient(135deg, var(--bg-elevated-60), var(--bg-tertiary))",
+             }}
+           />
            
            {/* Status Badge */}
            <div className="absolute top-4 left-4 z-10">
@@ -75,7 +82,7 @@ export function ProjectCard({ project }: ProjectCardProps) {
         </CardHeader>
 
         <CardContent className="grow">
-          <p className="text-muted-foreground line-clamp-3 mb-4">
+          <p className="text-(--text-secondary) line-clamp-3 mb-4">
             {project.description}
           </p>
           
@@ -86,14 +93,14 @@ export function ProjectCard({ project }: ProjectCardProps) {
               </Badge>
             ))}
             {project.tech.length > 3 && (
-              <Badge variant="outline" className="text-xs font-normal text-muted-foreground">
+              <Badge variant="outline" className="text-xs font-normal text-(--text-muted)">
                 +{project.tech.length - 3} more
               </Badge>
             )}
           </div>
         </CardContent>
 
-        <CardFooter className="pt-4 border-t border-slate-100 dark:border-slate-800 flex justify-between gap-4 z-20 bg-card">
+        <CardFooter className="pt-4 border-t border-(--border-soft) flex justify-between gap-4 z-20 bg-(--bg-secondary)">
           <Button variant="ghost" size="sm" className="w-full group/btn" asChild>
             <Link href={project.href}>
               View Details 

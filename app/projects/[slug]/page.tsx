@@ -58,7 +58,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
           </div>
         )}
 
-        <div className="pt-12 border-t">
+        <div className="pt-12 border-t border-(--border-default)">
           <BackToProjects className="py-0" />
         </div>
       </div>

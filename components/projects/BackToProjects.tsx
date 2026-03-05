@@ -18,9 +18,9 @@ export function BackToProjects({ className }: BackToProjectsProps) {
                     whileHover={{ x: -4 }}
                     transition={{ duration: 0.2 }}
                 >
-                    <ArrowLeft className="w-4 h-4 mr-2 text-muted-foreground group-hover:text-primary transition-colors" />
+                    <ArrowLeft className="w-4 h-4 mr-2 text-(--text-muted) group-hover:text-(--text-accent) transition-colors" />
                 </motion.div>
-                <span className="text-sm font-medium text-muted-foreground group-hover:text-primary transition-colors">
+                <span className="text-sm font-medium text-(--text-secondary) group-hover:text-(--text-accent) transition-colors">
                     Back to Projects
                 </span>
             </Link>

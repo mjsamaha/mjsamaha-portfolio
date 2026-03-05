@@ -49,8 +49,8 @@ export function ProjectsView() {
       {/* Main Content Area */}
       <div ref={projectsGridRef} className="scroll-mt-24">
         <div className="text-center mb-10">
-          <h2 className="text-3xl font-bold mb-4">All Projects</h2>
-          <p className="text-muted-foreground max-w-2xl mx-auto">
+          <h2 className="text-3xl font-bold mb-4 text-(--text-primary)">All Projects</h2>
+          <p className="text-(--text-secondary) max-w-2xl mx-auto">
              A collection of tools, applications, and experiments.
           </p>
         </div>
@@ -79,12 +79,12 @@ export function ProjectsView() {
             <motion.div 
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
-                className="text-center py-20 bg-slate-50 dark:bg-slate-900/50 rounded-lg border border-dashed border-slate-200 dark:border-slate-800"
+            className="text-center py-20 bg-(--bg-elevated-60) rounded-lg border border-dashed border-(--border-default)"
             >
-                <p className="text-muted-foreground">No projects found for this filter.</p>
+            <p className="text-(--text-secondary)">No projects found for this filter.</p>
                 <button 
                     onClick={() => setActiveFilter("all")}
-                    className="mt-4 text-primary hover:underline text-sm font-medium"
+              className="mt-4 text-(--text-accent) hover:underline text-sm font-medium"
                 >
                     Clear filters
                 </button>

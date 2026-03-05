@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef } from "react";
+import { type CSSProperties, useRef } from "react";
 import Link from "next/link";
 import { ArrowRight, ExternalLink, Radar } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
@@ -16,6 +16,24 @@ const COMPLETION_PERCENT =
   (activeProjectSpotlight.completedInitiatives /
     activeProjectSpotlight.totalInitiatives) *
   100;
+
+const spotlightContainerStyle: CSSProperties = {
+  borderColor: "var(--border-default)",
+  backgroundImage:
+    "linear-gradient(135deg, var(--surface-gradient-from), var(--surface-gradient-via), var(--surface-gradient-to))",
+  boxShadow: "var(--shadow-elevated)",
+};
+
+const spotlightBadgeStyle: CSSProperties = {
+  borderColor: "var(--border-strong)",
+  backgroundColor: "var(--bg-elevated-60)",
+  color: "var(--text-accent)",
+};
+
+const spotlightCardStyle: CSSProperties = {
+  borderColor: "var(--border-default)",
+  backgroundColor: "var(--bg-elevated-70)",
+};
 
 export default function ActiveProjectSpotlightSection() {
   const containerRef = useRef<HTMLElement>(null);
@@ -71,33 +89,34 @@ export default function ActiveProjectSpotlightSection() {
 
   return (
     <section ref={containerRef} className="relative py-16 md:py-20" aria-labelledby="active-project-spotlight-heading">
-      <div className="relative overflow-hidden rounded-3xl border border-sky-200/70 bg-linear-to-br from-sky-50 via-blue-50 to-cyan-50 p-6 shadow-xl dark:border-sky-900/50 dark:from-slate-950 dark:via-sky-950/50 dark:to-blue-950/40 md:p-10">
+      <div className="relative overflow-hidden rounded-3xl border p-6 md:p-10" style={spotlightContainerStyle}>
         <NavalGridBackground className="spotlight-grid-layer" hostRef={containerRef} />
 
         <div className="relative grid gap-8 lg:grid-cols-[1.6fr_1fr] lg:items-end">
           <div className="space-y-5">
             <Badge
               variant="outline"
-              className="spotlight-reveal border-sky-300/80 bg-white/70 px-3 py-1 text-sky-800 backdrop-blur-sm dark:border-sky-700 dark:bg-slate-900/60 dark:text-sky-300"
+              className="spotlight-reveal px-3 py-1 backdrop-blur-sm"
+              style={spotlightBadgeStyle}
             >
               <Radar className="size-3.5" /> {activeProjectSpotlight.missionLabel}
             </Badge>
 
             <div className="space-y-3">
-              <p className="spotlight-reveal text-xs font-semibold tracking-[0.2em] text-sky-800/80 uppercase dark:text-sky-200/80">
+              <p className="spotlight-reveal text-xs font-semibold tracking-[0.2em] uppercase" style={{ color: "var(--text-accent)", opacity: 0.8 }}>
                 {activeProjectSpotlight.eyebrow}
               </p>
-              <h2 id="active-project-spotlight-heading" className="spotlight-reveal text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl dark:text-slate-100">
+              <h2 id="active-project-spotlight-heading" className="spotlight-reveal text-3xl font-bold tracking-tight sm:text-4xl" style={{ color: "var(--text-primary)" }}>
                 {activeProjectSpotlight.displayTitle}
               </h2>
-              <p id="active-project-spotlight-description" className="spotlight-reveal max-w-3xl text-base leading-relaxed text-slate-700 dark:text-slate-300">
+              <p id="active-project-spotlight-description" className="spotlight-reveal max-w-3xl text-base leading-relaxed" style={{ color: "var(--text-secondary)" }}>
                 {activeProjectSpotlight.description}
               </p>
             </div>
 
             <div className="spotlight-reveal flex flex-wrap items-center gap-3">
               <Badge className={cn("border", project?.statusColor)}>{projectStatus}</Badge>
-              <Badge variant="secondary" className="bg-slate-900 text-slate-100 dark:bg-sky-100 dark:text-slate-900">
+              <Badge variant="secondary" style={{ backgroundColor: "var(--accent-subtle)", color: "var(--text-primary)" }}>
                 {activeProjectSpotlight.audienceLabel}
               </Badge>
             </div>
@@ -107,13 +126,22 @@ export default function ActiveProjectSpotlightSection() {
               role="group"
               aria-label="Active project spotlight actions"
             >
-              <Button asChild size="lg" className="bg-sky-700 text-white hover:bg-sky-800 dark:bg-sky-500 dark:text-slate-950 dark:hover:bg-sky-400">
+              <Button
+                asChild
+                size="lg"
+                className="bg-(--accent-primary) text-(--accent-foreground-strong) hover:bg-(--accent-primary-hover)"
+              >
                 <Link href={projectHref} aria-describedby="active-project-spotlight-description">
                   Explore {activeProjectSpotlight.displayTitle}
                   <ArrowRight className="size-4" />
                 </Link>
               </Button>
-              <Button asChild variant="outline" size="lg" className="border-sky-400/70 bg-white/70 text-sky-900 hover:bg-sky-100 dark:border-sky-700 dark:bg-slate-900/60 dark:text-sky-200 dark:hover:bg-sky-950/60">
+              <Button
+                asChild
+                variant="outline"
+                size="lg"
+                className="border-(--border-strong) bg-(--bg-elevated-60) text-(--text-accent) hover:bg-(--state-hover-overlay)"
+              >
                 <Link href={projectRepoUrl} target="_blank" rel="noreferrer noopener" aria-label={`View source code for ${activeProjectSpotlight.displayTitle} on GitHub`}>
                   View Source on GitHub
                   <ExternalLink className="size-4" />
@@ -122,22 +150,22 @@ export default function ActiveProjectSpotlightSection() {
             </div>
           </div>
 
-          <div className="spotlight-reveal rounded-2xl border border-sky-300/70 bg-white/80 p-5 backdrop-blur-sm dark:border-sky-900/70 dark:bg-slate-900/70">
-            <p className="text-xs font-semibold tracking-[0.16em] text-sky-900 uppercase dark:text-sky-200">Development Pulse</p>
-            <p className="mt-2 text-sm text-slate-700 dark:text-slate-300">
+          <div className="spotlight-reveal rounded-2xl border p-5 backdrop-blur-sm" style={spotlightCardStyle}>
+            <p className="text-xs font-semibold tracking-[0.16em] uppercase" style={{ color: "var(--text-accent)" }}>Development Pulse</p>
+            <p className="mt-2 text-sm" style={{ color: "var(--text-secondary)" }}>
               {activeProjectSpotlight.progressLabel}
             </p>
             <div className="mt-4 space-y-3">
-              <div className="flex items-center justify-between text-sm font-medium text-slate-800 dark:text-slate-200">
+              <div className="flex items-center justify-between text-sm font-medium" style={{ color: "var(--text-secondary)" }}>
                 <span>
                   {activeProjectSpotlight.completedInitiatives}/
                   {activeProjectSpotlight.totalInitiatives} complete
                 </span>
                 <span>{Math.round(COMPLETION_PERCENT)}%</span>
               </div>
-              <Progress value={COMPLETION_PERCENT} className="h-2.5 bg-sky-200/70 dark:bg-sky-950/70" />
+              <Progress value={COMPLETION_PERCENT} className="h-2.5 bg-(--bg-tertiary)" />
             </div>
-            <p className="mt-4 text-xs leading-relaxed text-slate-600 dark:text-slate-400">
+            <p className="mt-4 text-xs leading-relaxed" style={{ color: "var(--text-muted)" }}>
               {activeProjectSpotlight.progressFootnote}
             </p>
           </div>

@@ -8,7 +8,7 @@ export const metadata: Metadata = {
 
 export default function GalleryPage() {
   return (
-    <main className="min-h-screen bg-background">
+    <main className="min-h-screen">
       <GalleryView />
     </main>
   );

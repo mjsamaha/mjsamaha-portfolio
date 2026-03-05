@@ -20,7 +20,7 @@ function AlbumCover({ id }: { id: AlbumCategory }) {
     const coverPhoto = getAlbumCoverPhoto(id);
 
     if (!coverPhoto) {
-        return <div className="w-full h-full bg-muted flex items-center justify-center text-muted-foreground">No Cover</div>;
+        return <div className="w-full h-full bg-(--bg-tertiary) flex items-center justify-center text-(--text-muted)">No Cover</div>;
     }
 
     return (
@@ -45,22 +45,22 @@ export function AlbumGrid({
             {/* "All Photos" Card */}
             <Card
                 className={cn(
-                    "group cursor-pointer transition-all duration-300 hover:shadow-lg hover:scale-[1.02] overflow-hidden border-border",
-                    selectedAlbum === null ? "ring-2 ring-primary" : "hover:opacity-90"
+                    "group cursor-pointer transition-all duration-300 hover:shadow-(--shadow-elevated) hover:scale-[1.02] overflow-hidden border-(--border-default)",
+                    selectedAlbum === null ? "ring-2 ring-(--focus-ring)" : "hover:opacity-90"
                 )}
                 onClick={() => onAlbumSelect(null)}
             >
-                <div className="relative aspect-video w-full overflow-hidden bg-muted">
-                    <div className="absolute inset-0 bg-gradient-to-br from-primary/10 to-primary/5 group-hover:from-primary/20 group-hover:to-primary/10 transition-colors" />
+                <div className="relative aspect-video w-full overflow-hidden bg-(--bg-tertiary)">
+                    <div className="absolute inset-0 bg-linear-to-br from-(--state-hover-overlay) to-(--bg-elevated-60) group-hover:from-(--state-active-overlay) group-hover:to-(--state-hover-overlay) transition-colors" />
                     <div className="absolute inset-0 flex items-center justify-center">
-                        <ImageIcon className="w-12 h-12 text-primary/40 group-hover:text-primary/60 transition-colors" />
+                        <ImageIcon className="w-12 h-12 text-(--text-accent) opacity-60 group-hover:opacity-100 transition-colors" />
                     </div>
                 </div>
                 <CardContent className="p-4">
                     <div className="flex items-start justify-between">
                         <div>
                             <h3 className="font-semibold tracking-tight text-lg">All Photos</h3>
-                            <p className="text-sm text-muted-foreground line-clamp-2 mt-1">
+                            <p className="text-sm text-(--text-secondary) line-clamp-2 mt-1">
                                 View the complete collection of bird photography sorted by date.
                             </p>
                         </div>
@@ -83,31 +83,31 @@ export function AlbumGrid({
                     <Card
                         key={album.id}
                         className={cn(
-                            "group cursor-pointer transition-all duration-300 hover:shadow-lg hover:scale-[1.02] overflow-hidden border-border",
-                            isActive ? "ring-2 ring-primary" : "hover:opacity-90"
+                            "group cursor-pointer transition-all duration-300 hover:shadow-(--shadow-elevated) hover:scale-[1.02] overflow-hidden border-(--border-default)",
+                            isActive ? "ring-2 ring-(--focus-ring)" : "hover:opacity-90"
                         )}
                         onClick={() => onAlbumSelect(album.id)}
                     >
                         {/* Cover Image Area */}
-                        <div className="relative aspect-video w-full overflow-hidden bg-muted">
+                        <div className="relative aspect-video w-full overflow-hidden bg-(--bg-tertiary)">
                             <AlbumCover id={album.id} />
 
                             {/* Overlay Gradient */}
-                            <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-60 group-hover:opacity-40 transition-opacity" />
+                            <div className="absolute inset-0 bg-linear-to-t from-black/60 to-transparent opacity-60 group-hover:opacity-40 transition-opacity" />
 
                             {/* Icon Badge */}
-                            <div className="absolute top-2 left-2 bg-background/80 backdrop-blur-sm p-1.5 rounded-full shadow-sm">
-                                <IconComponent className="w-4 h-4 text-foreground" />
+                            <div className="absolute top-2 left-2 bg-(--bg-elevated-70) backdrop-blur-sm p-1.5 rounded-full shadow-sm border border-(--border-soft)">
+                                <IconComponent className="w-4 h-4 text-(--text-primary)" />
                             </div>
                         </div>
 
                         <CardContent className="p-4">
                             <div className="flex items-start justify-between">
                                 <div>
-                                    <h3 className="font-semibold tracking-tight text-lg group-hover:text-primary transition-colors">
+                                    <h3 className="font-semibold tracking-tight text-lg group-hover:text-(--text-accent) transition-colors">
                                         {album.name}
                                     </h3>
-                                    <p className="text-sm text-muted-foreground line-clamp-2 mt-1">
+                                    <p className="text-sm text-(--text-secondary) line-clamp-2 mt-1">
                                         {album.description}
                                     </p>
                                 </div>

@@ -9,7 +9,7 @@ import ContactForm from "@/components/sections/ContactForm";
 
 export default function Home() {
   return (
-    <main className="min-h-screen bg-background text-foreground space-y-16 md:space-y-24 pb-24">
+    <main className="min-h-screen space-y-16 md:space-y-24 pb-24">
       <HeroSection />
       <ActiveProjectSpotlightSection />
       <SkillsSection />

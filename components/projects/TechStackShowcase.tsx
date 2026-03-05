@@ -36,8 +36,8 @@ export function TechStackShowcase({ technicalDetails }: TechStackShowcaseProps) 
     return (
         <div className="space-y-8">
             <div className="space-y-2">
-                <h3 className="text-2xl font-bold tracking-tight">Technical Architecture</h3>
-                <p className="text-muted-foreground">
+                <h3 className="text-2xl font-bold tracking-tight text-(--text-primary)">Technical Architecture</h3>
+                <p className="text-(--text-secondary)">
                     Deep dive into the technology stack and infrastructure decisions.
                 </p>
             </div>
@@ -65,7 +65,7 @@ export function TechStackShowcase({ technicalDetails }: TechStackShowcaseProps) 
                                     </div>
                                 </CardHeader>
                                 <CardContent>
-                                    <p className="text-sm text-muted-foreground leading-relaxed">
+                                    <p className="text-sm text-(--text-secondary) leading-relaxed">
                                         {value}
                                     </p>
                                 </CardContent>
