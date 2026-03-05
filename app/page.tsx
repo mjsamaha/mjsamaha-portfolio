@@ -1,4 +1,5 @@
 import HeroSection from "@/components/sections/HeroSection";
+import ActiveProjectSpotlightSection from "@/components/sections/ActiveProjectSpotlightSection";
 import SkillsSection from "@/components/sections/SkillsSection";
 import ExperienceSection from "@/components/sections/ExperienceSection";
 import { EducationSection } from "@/components/sections/EducationSection";
@@ -10,6 +11,7 @@ export default function Home() {
   return (
     <main className="min-h-screen bg-background text-foreground space-y-16 md:space-y-24 pb-24">
       <HeroSection />
+      <ActiveProjectSpotlightSection />
       <SkillsSection />
       <ExperienceSection />
 
