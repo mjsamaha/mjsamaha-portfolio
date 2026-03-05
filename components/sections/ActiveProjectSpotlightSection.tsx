@@ -20,6 +20,10 @@ const COMPLETION_PERCENT =
 export default function ActiveProjectSpotlightSection() {
   const containerRef = useRef<HTMLElement>(null);
   const project = getProjectBySlug(activeProjectSpotlight.slug);
+  const projectHref = project?.href ?? `/projects/${activeProjectSpotlight.slug}`;
+  const projectRepoUrl =
+    project?.repoUrl ?? "https://github.com/mjsamaha/oaksignal-signalsmaster";
+  const projectStatus = project?.status ?? "In Development";
 
   useGSAP(
     () => {
@@ -65,14 +69,10 @@ export default function ActiveProjectSpotlightSection() {
     { scope: containerRef }
   );
 
-  if (!project) {
-    return null;
-  }
-
   return (
     <section ref={containerRef} className="relative py-16 md:py-20" aria-labelledby="active-project-spotlight-heading">
       <div className="relative overflow-hidden rounded-3xl border border-sky-200/70 bg-linear-to-br from-sky-50 via-blue-50 to-cyan-50 p-6 shadow-xl dark:border-sky-900/50 dark:from-slate-950 dark:via-sky-950/50 dark:to-blue-950/40 md:p-10">
-        <NavalGridBackground className="spotlight-grid-layer" />
+        <NavalGridBackground className="spotlight-grid-layer" hostRef={containerRef} />
 
         <div className="relative grid gap-8 lg:grid-cols-[1.6fr_1fr] lg:items-end">
           <div className="space-y-5">
@@ -90,27 +90,31 @@ export default function ActiveProjectSpotlightSection() {
               <h2 id="active-project-spotlight-heading" className="spotlight-reveal text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl dark:text-slate-100">
                 {activeProjectSpotlight.displayTitle}
               </h2>
-              <p className="spotlight-reveal max-w-3xl text-base leading-relaxed text-slate-700 dark:text-slate-300">
+              <p id="active-project-spotlight-description" className="spotlight-reveal max-w-3xl text-base leading-relaxed text-slate-700 dark:text-slate-300">
                 {activeProjectSpotlight.description}
               </p>
             </div>
 
             <div className="spotlight-reveal flex flex-wrap items-center gap-3">
-              <Badge className={cn("border", project.statusColor)}>{project.status}</Badge>
+              <Badge className={cn("border", project?.statusColor)}>{projectStatus}</Badge>
               <Badge variant="secondary" className="bg-slate-900 text-slate-100 dark:bg-sky-100 dark:text-slate-900">
                 {activeProjectSpotlight.audienceLabel}
               </Badge>
             </div>
 
-            <div className="spotlight-reveal flex flex-wrap gap-3">
+            <div
+              className="spotlight-reveal flex flex-wrap gap-3"
+              role="group"
+              aria-label="Active project spotlight actions"
+            >
               <Button asChild size="lg" className="bg-sky-700 text-white hover:bg-sky-800 dark:bg-sky-500 dark:text-slate-950 dark:hover:bg-sky-400">
-                <Link href={project.href}>
+                <Link href={projectHref} aria-describedby="active-project-spotlight-description">
                   Explore {activeProjectSpotlight.displayTitle}
                   <ArrowRight className="size-4" />
                 </Link>
               </Button>
               <Button asChild variant="outline" size="lg" className="border-sky-400/70 bg-white/70 text-sky-900 hover:bg-sky-100 dark:border-sky-700 dark:bg-slate-900/60 dark:text-sky-200 dark:hover:bg-sky-950/60">
-                <Link href={project.repoUrl} target="_blank" rel="noreferrer noopener">
+                <Link href={projectRepoUrl} target="_blank" rel="noreferrer noopener" aria-label={`View source code for ${activeProjectSpotlight.displayTitle} on GitHub`}>
                   View Source on GitHub
                   <ExternalLink className="size-4" />
                 </Link>
