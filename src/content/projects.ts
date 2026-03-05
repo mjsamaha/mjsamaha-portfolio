@@ -16,6 +16,7 @@ export interface Project {
   tech: string[];
   href: string;
   repoUrl: string;
+  cardImage?: string;
   demoUrl?: string; // Optional
   problem: string;
   problemDomain: {
@@ -76,6 +77,7 @@ export const projects: Project[] = [
     tech: ["Next.js", "ShadCN/UI", "Convex", "Clerk", "Multi-Tenant"],
     href: "/projects/signalsmaster",
     repoUrl: "https://github.com/mjsamaha/oaksignal-signalsmaster",
+    cardImage: "/app_photos/signalsmaster1.PNG",
     problem: "Fragmented knowledge management and inconsistent training delivery across cadet units.",
     problemDomain: {
       headline: "The Challenge: Fragmented & Inconsistent Training",

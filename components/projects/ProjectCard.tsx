@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import Link from "next/link";
+import Image from "next/image";
 import { ArrowRight, Github, Anchor } from "lucide-react";
 import { 
   Card, 
@@ -43,17 +44,34 @@ export function ProjectCard({ project }: ProjectCardProps) {
           </div>
         )}
 
-        {/* Thumbnail Area (Placeholder or Image) */}
+        {/* Thumbnail Area (Image when provided, otherwise themed gradient fallback) */}
         <div className="relative h-48 bg-(--bg-tertiary) overflow-hidden border-b border-(--border-soft)">
-           {/* If we had images, we'd put Next/Image here. For now, solid color or pattern */}
-           <div
-             className="absolute inset-0"
-             style={{
-               backgroundImage: isOakSignal
-                 ? "linear-gradient(135deg, var(--state-hover-overlay), var(--bg-tertiary))"
-                 : "linear-gradient(135deg, var(--bg-elevated-60), var(--bg-tertiary))",
-             }}
-           />
+           {project.cardImage ? (
+             <>
+               <Image
+                 src={project.cardImage}
+                 alt={`${project.title} project preview`}
+                 fill
+                 className="object-cover"
+                 sizes="(min-width: 1280px) 33vw, (min-width: 768px) 50vw, 100vw"
+               />
+               <div
+                 className="absolute inset-0"
+                 style={{
+                   backgroundImage: "linear-gradient(to top, rgba(2, 6, 23, 0.7), rgba(2, 6, 23, 0.12), transparent)",
+                 }}
+               />
+             </>
+           ) : (
+             <div
+               className="absolute inset-0"
+               style={{
+                 backgroundImage: isOakSignal
+                   ? "linear-gradient(135deg, var(--state-hover-overlay), var(--bg-tertiary))"
+                   : "linear-gradient(135deg, var(--bg-elevated-60), var(--bg-tertiary))",
+               }}
+             />
+           )}
            
            {/* Status Badge */}
            <div className="absolute top-4 left-4 z-10">
