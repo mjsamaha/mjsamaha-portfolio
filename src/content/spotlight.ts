@@ -19,7 +19,7 @@ export const activeProjectSpotlight: ActiveProjectSpotlightConfig = {
   description:
     "Educational naval training application helping sea cadets master maritime signal flags and pennants through structured, practical learning.",
   audienceLabel: "Sea Cadet Audience",
-  progressLabel: "Major Linear initiatives completed",
+  progressLabel: "Major initiatives completed",
   completedInitiatives: 2,
   totalInitiatives: 5,
   progressFootnote:
