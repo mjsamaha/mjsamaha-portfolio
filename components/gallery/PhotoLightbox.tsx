@@ -75,17 +75,23 @@ export function PhotoLightbox({
 
     return (
         <Dialog open={isOpen} onOpenChange={(open) => !open && onClose()}>
-            <DialogContent className="max-w-[95vw] lg:max-w-7xl h-[90vh] p-0 gap-0 overflow-hidden bg-(--bg-elevated-70) backdrop-blur-xl border-(--border-default) [&>button]:hidden">
+            <DialogContent className="max-w-[95vw] lg:max-w-7xl h-[90vh] p-0 gap-0 overflow-hidden bg-(--bg-secondary) backdrop-blur-xl border-(--border-default) [&>button]:hidden">
                 <div className="flex flex-col lg:flex-row h-full w-full">
 
                     {/* Left Side: Image Viewer */}
-                    <div className="relative flex-1 bg-(--bg-tertiary) flex items-center justify-center p-4 lg:p-8 min-h-[50vh] lg:min-h-full overflow-hidden">
+                    <div
+                        className="relative flex-1 bg-(--bg-primary) flex items-center justify-center p-4 lg:p-8 min-h-[50vh] lg:min-h-full overflow-hidden"
+                        style={{
+                            backgroundImage:
+                                "radial-gradient(120% 90% at 50% 50%, var(--bg-secondary) 0%, var(--bg-primary) 72%)",
+                        }}
+                    >
 
                         {/* Navigation Buttons (Desktop: Internal, Mobile: Hidden/Swipe) */}
                         <Button
                             variant="ghost"
                             size="icon"
-                            className="absolute left-4 z-20 hidden lg:flex h-12 w-12 rounded-full bg-(--bg-elevated-70) hover:bg-(--state-hover-overlay) backdrop-blur-sm text-(--text-primary) transition-all disabled:opacity-0 border border-(--border-soft)"
+                            className="absolute left-4 z-20 hidden lg:flex h-12 w-12 rounded-full bg-(--bg-secondary) hover:bg-(--state-hover-overlay) backdrop-blur-sm text-(--text-primary) transition-all disabled:opacity-0 border border-(--border-soft)"
                             onClick={() => onNavigate('prev')}
                             disabled={currentIndex === 0}
                         >
@@ -96,7 +102,7 @@ export function PhotoLightbox({
                         <Button
                             variant="ghost"
                             size="icon"
-                            className="absolute right-4 z-20 hidden lg:flex h-12 w-12 rounded-full bg-(--bg-elevated-70) hover:bg-(--state-hover-overlay) backdrop-blur-sm text-(--text-primary) transition-all disabled:opacity-0 border border-(--border-soft)"
+                            className="absolute right-4 z-20 hidden lg:flex h-12 w-12 rounded-full bg-(--bg-secondary) hover:bg-(--state-hover-overlay) backdrop-blur-sm text-(--text-primary) transition-all disabled:opacity-0 border border-(--border-soft)"
                             onClick={() => onNavigate('next')}
                             disabled={currentIndex === photos.length - 1}
                         >

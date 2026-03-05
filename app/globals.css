@@ -72,11 +72,6 @@
 :root {
   --radius: 0.625rem;
 
-  /* Global app canvas */
-  --app-canvas-base: #ffffff;
-  --app-canvas-vignette: rgba(15, 23, 42, 0.08);
-  --app-canvas-top-glow: rgba(14, 165, 233, 0.1);
-  --app-canvas-bottom-glow: rgba(30, 58, 138, 0.08);
 
   /* Core shadcn/system tokens */
   --background: oklch(1 0 0);
@@ -202,15 +197,9 @@
   --sidebar-ring: oklch(0.552 0.016 285.938);
 
   /* Background Surfaces */
-  --bg-primary: #000000;
-  --bg-secondary: #071124;
-  --bg-tertiary: #0f1d39;
-
-  /* Global app canvas */
-  --app-canvas-base: #000000;
-  --app-canvas-vignette: rgba(15, 23, 42, 0.58);
-  --app-canvas-top-glow: rgba(8, 47, 73, 0.35);
-  --app-canvas-bottom-glow: rgba(23, 37, 84, 0.28);
+  --bg-primary: #020617;
+  --bg-secondary: #0f172a;
+  --bg-tertiary: #172554;
 
   /* Background Elevated (alpha + fallback) */
   --bg-elevated-60: rgba(15, 23, 42, 0.6);
@@ -269,12 +258,7 @@
   }
   body {
     @apply text-foreground;
-    background-color: var(--app-canvas-base);
-    background-image:
-      radial-gradient(1200px 520px at 50% -8%, var(--app-canvas-top-glow), transparent 65%),
-      radial-gradient(1100px 680px at 50% 118%, var(--app-canvas-bottom-glow), transparent 68%),
-      radial-gradient(ellipse at center, transparent 45%, var(--app-canvas-vignette) 100%);
-    background-repeat: no-repeat;
+    background-color: var(--bg-primary);
   }
 }
 

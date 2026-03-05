@@ -33,7 +33,9 @@ export default function Footer() {
       className="w-full border-t"
       style={{
         borderColor: "var(--border-default)",
-        backgroundColor: "var(--bg-secondary)",
+        backgroundColor: "var(--bg-primary)",
+        backgroundImage:
+          "linear-gradient(180deg, var(--bg-secondary) 0%, var(--bg-primary) 100%)",
       }}
     >
       <div className="container mx-auto px-4 max-w-7xl py-8">

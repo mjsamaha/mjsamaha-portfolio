@@ -93,7 +93,12 @@ export function AlbumGrid({
                             <AlbumCover id={album.id} />
 
                             {/* Overlay Gradient */}
-                            <div className="absolute inset-0 bg-linear-to-t from-black/60 to-transparent opacity-60 group-hover:opacity-40 transition-opacity" />
+                            <div
+                                className="absolute inset-0 opacity-60 group-hover:opacity-40 transition-opacity"
+                                style={{
+                                    backgroundImage: "linear-gradient(to top, rgba(2, 6, 23, 0.62), transparent)",
+                                }}
+                            />
 
                             {/* Icon Badge */}
                             <div className="absolute top-2 left-2 bg-(--bg-elevated-70) backdrop-blur-sm p-1.5 rounded-full shadow-sm border border-(--border-soft)">

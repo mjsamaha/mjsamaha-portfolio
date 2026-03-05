@@ -80,7 +80,12 @@ export function PhotoGrid({ photos, onPhotoClick }: PhotoGridProps) {
                             />
 
                             {/* Hover Overlay */}
-                            <div className="absolute inset-0 bg-linear-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-4">
+                            <div
+                                className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-4"
+                                style={{
+                                    backgroundImage: "linear-gradient(to top, rgba(2, 6, 23, 0.82), rgba(2, 6, 23, 0.24), transparent)",
+                                }}
+                            >
                                 <h3 className="text-white font-medium text-lg leading-tight translate-y-2 group-hover:translate-y-0 transition-transform duration-300">
                                     {photo.commonName}
                                 </h3>

@@ -7,20 +7,18 @@ import { scaleIn } from "@/lib/animations";
 
 export default function CTASection() {
   return (
-    <section
-      className="py-16"
-      style={{
-        backgroundImage:
-          "linear-gradient(90deg, var(--bg-elevated-60), var(--state-hover-overlay))",
-      }}
-    >
+    <section className="py-16 bg-(--bg-primary)">
       <div className="container mx-auto px-4 text-center">
         <motion.div
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
           variants={scaleIn}
-          className="max-w-3xl mx-auto space-y-8"
+          className="max-w-3xl mx-auto space-y-8 rounded-2xl border border-(--border-default) p-8 md:p-10"
+          style={{
+            backgroundImage:
+              "linear-gradient(90deg, var(--bg-elevated-60), var(--state-hover-overlay))",
+          }}
         >
           <h2 className="text-3xl md:text-4xl font-bold tracking-tight text-(--text-primary)">
             Want to see more of my work?
