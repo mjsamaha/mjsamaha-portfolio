@@ -115,7 +115,7 @@ export const projects = [
     status: "In Development" as const,
     statusColor: "bg-yellow-100 text-yellow-800 dark:bg-yellow-900/30 dark:text-yellow-500 ring-yellow-600/20",
     tech: ["Next.js", "ShadCN/UI", "PostgreSQL", "Multi-Tenant", "OAuth2"],
-    href: "/projects/signalsmaster",
+    href: "https://oaksignal-signalsmaster.vercel.app/",
     repoUrl: "https://github.com/mjsamaha/signalsmaster",
     problem: "Fragmented knowledge management and inconsistent training delivery across cadet units.",
     problemDomain: {
