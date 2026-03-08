@@ -5,107 +5,67 @@
  * information for both card views and dedicated project pages.
  */
 
-// ============================================================================
-// TYPE DEFINITIONS
-// ============================================================================
-
-/**
- * Project development status
- */
-export type ProjectStatus = "In Development" | "Completed" | "Planning";
-
-/**
- * Project category/type
- */
-export type ProjectCategory = "LMS" | "Inventory" | "Web App" | "Tool" | "Other";
-
-/**
- * Problem domain description
- */
-export interface ProblemDomain {
-  readonly headline: string;
-  readonly points: readonly string[];
-}
-
-/**
- * Solution description
- */
-export interface Solution {
-  readonly headline: string;
-  readonly points: readonly string[];
-}
-
-/**
- * Technical implementation details
- */
-export interface TechnicalDetails {
-  readonly frontend: string;
-  readonly backend: string;
-  readonly database: string;
-  readonly auth: string;
-  readonly storage: string;
-  readonly security: string;
-}
-
-/**
- * Timeline phase (details can be string or array)
- */
-export interface TimelinePhase {
-  readonly phase: string;
-  readonly date: string;
-  readonly details: string | readonly string[];
-}
-
-/**
- * User role and access level
- */
-export interface ProjectRole {
-  readonly role: string;
-  readonly access: string;
-}
-
-/**
- * Multi-tenant architecture details
- */
-export interface MultiTenantDetails {
-  readonly headline: string;
-  readonly structure: readonly string[];
-}
-
-/**
- * Complete project data structure
- */
 export interface Project {
-  readonly id: number;
-  readonly slug: string;
-  readonly title: string;
-  readonly description: string;
-  readonly executiveSummary: string;
-  readonly status: ProjectStatus;
-  readonly statusColor: string;
-  readonly tech: readonly string[];
-  readonly href: string;
-  readonly repoUrl: string;
-  readonly problem: string;
-  readonly problemDomain: ProblemDomain;
-  readonly outcome: string;
-  readonly solution: Solution;
-  readonly features: readonly string[];
-  readonly detailedOverview: string;
-  readonly technicalDetails: TechnicalDetails;
-  readonly timeline: readonly TimelinePhase[];
-  readonly roles: readonly ProjectRole[];
-  readonly multiTenantDetails: MultiTenantDetails;
-  readonly year?: number;
-  readonly category?: ProjectCategory;
-  readonly thumbnail?: string;
+  id: number;
+  slug: string;
+  title: string;
+  description: string;
+  executiveSummary: string;
+  status: "Live" | "In Development" | "Planning";
+  statusColor: string;
+  tech: string[];
+  href: string;
+  repoUrl: string;
+  cardImage?: string;
+  demoUrl?: string; // Optional
+  problem: string;
+  problemDomain: {
+    headline: string;
+    points: string[];
+  };
+  outcome: string;
+  solution: {
+    headline: string;
+    points: string[];
+  };
+  features: string[];
+  detailedOverview: string;
+  technicalDetails?: {
+    frontend: string;
+    backend: string;
+    database: string;
+    auth: string;
+    storage: string;
+    security: string;
+    infrastructure?: string;
+  };
+  timeline?: {
+    phase: string;
+    date: string;
+    details: string | string[];
+  }[];
+  roles?: {
+    role: string;
+    access: string;
+  }[];
+  multiTenantDetails?: {
+    headline: string;
+    structure: string[];
+  };
+  year?: number;
+  category?: string;
+  organization?: {
+    name: string;
+    slug: string;
+    tagline: string;
+  };
+  metrics?: {
+    label: string;
+    value: string;
+  }[];
 }
 
-// ============================================================================
-// DATA
-// ============================================================================
-
-export const projects = [
+export const projects: Project[] = [
   {
     id: 1,
     slug: "signalsmaster",
@@ -115,7 +75,7 @@ export const projects = [
     status: "In Development" as const,
     statusColor: "bg-yellow-100 text-yellow-800 dark:bg-yellow-900/30 dark:text-yellow-500 ring-yellow-600/20",
     tech: ["Next.js", "ShadCN/UI", "PostgreSQL", "Multi-Tenant", "OAuth2"],
-    href: "https://oaksignal-signalsmaster.vercel.app/",
+    href: "/projects/signalsmaster",
     repoUrl: "https://github.com/mjsamaha/signalsmaster",
     problem: "Fragmented knowledge management and inconsistent training delivery across cadet units.",
     problemDomain: {
@@ -152,41 +112,41 @@ export const projects = [
     detailedOverview: "SignalsMaster is a specialized learning management system designed to modernize sea cadet training. Unlike generic LMS platforms, it is purpose-built for the maritime context, offering specific modules for Signal Flags, Seamanship, and Drill. The platform utilizes a multi-tenant architecture, ensuring that each cadet unit operates in a completely isolated environment—securely managing their own cadets, data, and progress tracking while benefiting from a shared, robust infrastructure. Starting with a pilot at Oakville Sea Cadets, it aims to scale to units nationwide.",
     technicalDetails: {
       frontend: "Next.js (React), TypeScript, ShadCN/UI, Tailwind CSS",
-      backend: "Node.js/Express or Next.js API routes",
-      database: "PostgreSQL with multi-tenant schema (unit_id scoping)",
-      auth: "Microsoft Azure AD OAuth2 + JWT tokens",
-      storage: "Cloud-based storage for learning materials (images, videos, PDFs)",
-      security: "Row-level security, email domain validation, encrypted traffic"
+      backend: "Convex (Serverless Functions)",
+      database: "Convex (Real-time Database with multi-tenant schema)",
+      auth: "Clerk (Authentication and User Management)",
+      storage: "Convex (File Storage)",
+      security: "Convex data validation, Clerk role-based access"
     },
     timeline: [
-      { 
-        phase: "Alpha Launch", 
-        date: "March 2026", 
-        details: "Pilot with Oakville Sea Cadets" 
+      {
+        phase: "Alpha Launch",
+        date: "March 2026",
+        details: "Pilot with Oakville Sea Cadets"
       },
-      { 
-        phase: "Beta Launch", 
-        date: "April 2026", 
-        details: "Expanded testing and feature refinement" 
+      {
+        phase: "Beta Launch",
+        date: "April 2026",
+        details: "Expanded testing and feature refinement"
       },
-      { 
-        phase: "Expansion", 
-        date: "Q3 2026", 
-        details: "Rollout to future Sea Cadet units and potential Army/Air expansion" 
+      {
+        phase: "Expansion",
+        date: "Q3 2026",
+        details: "Rollout to future Sea Cadet units and potential Army/Air expansion"
       }
     ],
     roles: [
-      { 
-        role: "Junior Cadets", 
-        access: "Access learning materials, complete assessments, view own progress" 
+      {
+        role: "Junior Cadets",
+        access: "Access learning materials, complete assessments, view own progress"
       },
-      { 
-        role: "Senior Cadets", 
-        access: "Mentor/tutor capabilities + Junior access" 
+      {
+        role: "Senior Cadets",
+        access: "Mentor/tutor capabilities + Junior access"
       },
-      { 
-        role: "Officers/Instructors", 
-        access: "Full admin—create content, manage cadets, view analytics, configure unit settings" 
+      {
+        role: "Officers/Instructors",
+        access: "Full admin—create content, manage cadets, view analytics, configure unit settings"
       }
     ],
     multiTenantDetails: {
@@ -198,19 +158,30 @@ export const projects = [
       ]
     },
     year: 2026,
-    category: "LMS" as const
+    category: "LMS",
+    organization: {
+      name: "OakSignal",
+      slug: "oaksignal",
+      tagline: "Digital tools for cadet organizations"
+    },
+    metrics: [
+      { label: "Active Users", value: "Pilot Phase" },
+      { label: "Modules", value: "4+" },
+      { label: "Platform", value: "Web & PWA" },
+      { label: "Architecture", value: "Multi-Tenant" }
+    ]
   },
   {
     id: 2,
-    slug: "quartermaster",
-    title: "Quartermaster",
+    slug: "cims",
+    title: "Cadet Inventory Management System",
     description: "Enterprise-grade cadet inventory and supply management system.",
     executiveSummary: "An enterprise-grade inventory and supply management system built to streamline logistics and accountability for cadet units, featuring multi-tenant data isolation and role-based permissions.",
-    status: "Planning" as const,
-    statusColor: "bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-400 ring-blue-600/20",
-    tech: ["Multi-Tenant", "Inventory Tracking", "Audit Logging", "Role-Based Access"],
-    href: "/projects/quartermaster",
-    repoUrl: "https://github.com/mjsamaha/quartermaster",
+    status: "Planning",
+    statusColor: "bg-(--state-hover-overlay) text-(--text-accent) border-(--border-strong)",
+    tech: ["Spring Boot", "Next.js", "Neon", "MongoDB", "Clerk", "ShadCN/UI"],
+    href: "/projects/cims",
+    repoUrl: "https://github.com/mjsamaha/",
     problem: "Poor inventory visibility and reliance on paper tracking leads to lost equipment and lack of accountability.",
     problemDomain: {
       headline: "The Challenge: Logistics & Accountability",
@@ -245,12 +216,13 @@ export const projects = [
     ],
     detailedOverview: "Quartermaster is an enterprise-grade inventory management system designed to solve the logistics challenges faced by cadet units. Currently in the planning and analysis phase, it aims to replace fragmented paper-based tracking with a robust, multi-tenant digital platform. By providing each unit with its own isolated data environment, Quartermaster ensures security and autonomy while offering powerful tools for tracking uniforms, equipment, and supplies. The system emphasizes accountability through digital audit trails and simplifies operations with role-based delegation, allowing senior cadets to assist with logistics under officer supervision.",
     technicalDetails: {
-      frontend: "Next.js (React), TypeScript, ShadCN/UI",
-      backend: "Node.js/Express or Next.js API routes",
-      database: "PostgreSQL with multi-tenant schema",
-      auth: "Microsoft Azure AD OAuth2 + JWT tokens",
+      frontend: "Next.js, TypeScript, ShadCN/UI, GSAP",
+      backend: "Spring Boot, Spring MVC/REST API",
+      database: "Neon (Serverless PostgreSQL), and MongoDB for flexible asset documentation",
+      auth: "Clerk, Spring Security",
       storage: "Cloud Storage for asset documentation",
-      security: "Row-level security, audit logging, role-based permissions"
+      security: "Row-level security, audit logging, role-based permissions",
+      infrastructure: "Render (Backend), Vercel (Frontend), Docker"
     },
     timeline: [
       {
@@ -290,17 +262,17 @@ export const projects = [
       }
     ],
     roles: [
-      { 
-        role: "Junior Cadets", 
-        access: "View-only access, ability to submit equipment requests" 
+      {
+        role: "Junior Cadets",
+        access: "View-only access, ability to submit equipment requests"
       },
-      { 
-        role: "Senior Cadets", 
-        access: "Limited admin access for day-to-day operations, equipment issue/return" 
+      {
+        role: "Senior Cadets",
+        access: "Limited admin access for day-to-day operations, equipment issue/return"
       },
-      { 
-        role: "Officers/Adult Staff", 
-        access: "Full administrative access, reporting, system configuration" 
+      {
+        role: "Officers/Adult Staff",
+        access: "Full administrative access, reporting, system configuration"
       }
     ],
     multiTenantDetails: {
@@ -311,9 +283,20 @@ export const projects = [
       ]
     },
     year: 2026,
-    category: "Inventory" as const
+    category: "Inventory",
+    organization: {
+      name: "OakSignal",
+      slug: "oaksignal",
+      tagline: "Digital tools for cadet organizations"
+    },
+    metrics: [
+      { label: "Stage", value: "Planning" },
+      { label: "Exp. Launch", value: "Q4 2026" },
+      { label: "Target Users", value: "50+" },
+      { label: "Key Feature", value: "Audit Logs" }
+    ]
   }
-] as const satisfies readonly Project[];
+];
 
 // ============================================================================
 // HELPER FUNCTIONS
@@ -333,7 +316,7 @@ export function getProjectBySlug(slug: string): Project | undefined {
  * @param status - Project status to filter by
  * @returns Array of projects matching the status
  */
-export function getProjectsByStatus(status: ProjectStatus): readonly Project[] {
+export function getProjectsByStatus(status: Project["status"]): readonly Project[] {
   return projects.filter(project => project.status === status);
 }
 
@@ -362,8 +345,17 @@ export function getAllSlugs(): readonly string[] {
  * @param category - Project category to filter by
  * @returns Array of projects matching the category
  */
-export function getProjectsByCategory(category: ProjectCategory): readonly Project[] {
+export function getProjectsByCategory(category: NonNullable<Project["category"]>): readonly Project[] {
   return projects.filter(project => project.category === category);
+}
+
+/**
+ * Get projects filtered by organization slug
+ * @param orgSlug - Organization slug to filter by (e.g. "oaksignal")
+ * @returns Array of projects belonging to the organization
+ */
+export function getProjectsByOrg(orgSlug: string): readonly Project[] {
+  return projects.filter(project => project.organization?.slug === orgSlug);
 }
 
 // ============================================================================

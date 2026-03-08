@@ -1,24 +1,28 @@
-import Link from "next/link";
-import { Button } from "@/components/ui/button";
+import HeroSection from "@/components/sections/HeroSection";
+import ActiveProjectSpotlightSection from "@/components/sections/ActiveProjectSpotlightSection";
+import SkillsSection from "@/components/sections/SkillsSection";
+import ExperienceSection from "@/components/sections/ExperienceSection";
+import { EducationSection } from "@/components/sections/EducationSection";
+import CTASection from "@/components/sections/CTASection";
+import FeaturedGallery from "@/components/sections/FeaturedGallery";
+import ContactForm from "@/components/sections/ContactForm";
 
 export default function Home() {
   return (
-    <div className="flex min-h-[calc(100vh-200px)] items-center justify-center">
-      <div className="text-center space-y-6 px-4">
-        <h1 className="text-5xl md:text-6xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
-          Matthew Samaha
-        </h1>
-        <p className="text-xl md:text-2xl text-muted-foreground max-w-3xl">
-          Full-Stack Developer | Naval Reservist | Bird Photographer
-        </p>
-        <div className="pt-4">
-          <Button asChild size="lg">
-            <Link href="/projects">
-              View Projects
-            </Link>
-          </Button>
-        </div>
+    <main className="min-h-screen space-y-16 md:space-y-24 pb-24">
+      <HeroSection />
+      <ActiveProjectSpotlightSection />
+      <SkillsSection />
+      <ExperienceSection />
+
+      {/* Education needs a wrapper to match the width of other container-based sections */}
+      <div className="container max-w-4xl mx-auto px-4">
+        <EducationSection />
       </div>
-    </div>
+
+      <CTASection />
+      <FeaturedGallery />
+      <ContactForm />
+    </main>
   );
 }

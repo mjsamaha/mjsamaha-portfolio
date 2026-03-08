@@ -29,27 +29,35 @@ export default function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="w-full border-t bg-muted">
+    <footer
+      className="w-full border-t"
+      style={{
+        borderColor: "var(--border-default)",
+        backgroundColor: "var(--bg-primary)",
+        backgroundImage:
+          "linear-gradient(180deg, var(--bg-secondary) 0%, var(--bg-primary) 100%)",
+      }}
+    >
       <div className="container mx-auto px-4 max-w-7xl py-8">
         {/* Three Column Grid */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
           {/* About Section */}
           <div>
-            <h3 className="font-semibold text-foreground mb-3">About</h3>
-            <p className="text-sm text-muted-foreground leading-relaxed">
+            <h3 className="font-semibold mb-3 text-(--text-primary)">About</h3>
+            <p className="text-sm leading-relaxed text-(--text-secondary)">
               Building software with precision and purpose
             </p>
           </div>
 
           {/* Quick Links Section */}
           <div>
-            <h3 className="font-semibold text-foreground mb-3">Quick Links</h3>
+            <h3 className="font-semibold mb-3 text-(--text-primary)">Quick Links</h3>
             <ul className="space-y-2">
               {quickLinks.map((link) => (
                 <li key={link.name}>
                   <Link
                     href={link.href}
-                    className="text-sm text-muted-foreground hover:text-primary transition-colors"
+                    className="text-sm text-(--text-secondary) hover:text-(--text-accent) transition-colors"
                   >
                     {link.name}
                   </Link>
@@ -60,7 +68,7 @@ export default function Footer() {
 
           {/* Social/Connect Section */}
           <div>
-            <h3 className="font-semibold text-foreground mb-3">Connect</h3>
+            <h3 className="font-semibold mb-3 text-(--text-primary)">Connect</h3>
             <div className="flex items-center gap-4">
               {socialLinks.map((link) => (
                 <Link
@@ -68,7 +76,7 @@ export default function Footer() {
                   href={link.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-muted-foreground hover:text-primary transition-colors"
+                  className="text-(--text-secondary) hover:text-(--text-accent) transition-colors"
                   aria-label={link.name}
                 >
                   <link.icon className="h-5 w-5" />
@@ -79,8 +87,8 @@ export default function Footer() {
         </div>
 
         {/* Copyright - Centered at Bottom */}
-        <div className="pt-6 border-t border-border/40 text-center">
-          <p className="text-sm text-muted-foreground">
+        <div className="pt-6 border-t text-center" style={{ borderColor: "var(--border-soft)" }}>
+          <p className="text-sm text-(--text-muted)">
             © {currentYear} Matthew Samaha. All rights reserved.
           </p>
         </div>

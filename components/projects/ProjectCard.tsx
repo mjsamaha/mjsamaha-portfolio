@@ -1,0 +1,140 @@
+"use client";
+
+import { motion } from "framer-motion";
+import Link from "next/link";
+import Image from "next/image";
+import { ArrowRight, Github, Anchor } from "lucide-react";
+import { 
+  Card, 
+  CardContent, 
+  CardFooter, 
+  CardHeader, 
+  CardTitle, 
+  CardDescription 
+} from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import { Project } from "@/src/content/projects";
+
+interface ProjectCardProps {
+  project: Project;
+}
+
+export function ProjectCard({ project }: ProjectCardProps) {
+  const isOakSignal = project.organization?.slug === "oaksignal";
+
+  return (
+    <motion.div
+      layout
+      initial={{ opacity: 0, scale: 0.95 }}
+      animate={{ opacity: 1, scale: 1 }}
+      exit={{ opacity: 0, scale: 0.95 }}
+      transition={{ duration: 0.3 }}
+      className="h-full"
+    >
+      <Card className="h-full flex flex-col overflow-hidden transition-shadow duration-300 border-(--border-default) relative group">
+        
+        {/* OakSignal Badge */}
+        {isOakSignal && (
+          <div className="absolute top-4 right-4 z-20">
+            <Badge className="bg-(--accent-primary) hover:bg-(--accent-primary-hover) text-(--accent-foreground-strong) shadow-sm gap-1 pl-1.5 border-none">
+              <Anchor className="w-3 h-3" />
+              Part of OakSignal
+            </Badge>
+          </div>
+        )}
+
+        {/* Thumbnail Area (Image when provided, otherwise themed gradient fallback) */}
+        <div className="relative h-48 bg-(--bg-tertiary) overflow-hidden border-b border-(--border-soft)">
+           {project.cardImage ? (
+             <>
+               <Image
+                 src={project.cardImage}
+                 alt={`${project.title} project preview`}
+                 fill
+                 className="object-cover"
+                 sizes="(min-width: 1280px) 33vw, (min-width: 768px) 50vw, 100vw"
+               />
+               <div
+                 className="absolute inset-0"
+                 style={{
+                   backgroundImage: "linear-gradient(to top, rgba(2, 6, 23, 0.7), rgba(2, 6, 23, 0.12), transparent)",
+                 }}
+               />
+             </>
+           ) : (
+             <div
+               className="absolute inset-0"
+               style={{
+                 backgroundImage: isOakSignal
+                   ? "linear-gradient(135deg, var(--state-hover-overlay), var(--bg-tertiary))"
+                   : "linear-gradient(135deg, var(--bg-elevated-60), var(--bg-tertiary))",
+               }}
+             />
+           )}
+           
+           {/* Status Badge */}
+           <div className="absolute top-4 left-4 z-10">
+             <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium border ${project.statusColor}`}>
+               {project.status}
+             </span>
+           </div>
+        </div>
+
+        <CardHeader>
+          <div className="flex justify-between items-start">
+            <div>
+              <CardTitle className="mb-2 text-xl group-hover:text-primary transition-colors">
+                <Link href={project.href} className="focus:outline-none">
+                  {project.title}
+                  <span className="absolute inset-0" aria-hidden="true" />
+                </Link>
+              </CardTitle>
+              {project.category && (
+                <CardDescription className="font-medium">
+                  {project.category}
+                </CardDescription>
+              )}
+            </div>
+          </div>
+        </CardHeader>
+
+        <CardContent className="grow">
+          <p className="text-(--text-secondary) line-clamp-3 mb-4">
+            {project.description}
+          </p>
+          
+          <div className="flex flex-wrap gap-2 mt-auto">
+            {project.tech.slice(0, 3).map((tech) => (
+              <Badge key={tech} variant="secondary" className="text-xs font-normal">
+                {tech}
+              </Badge>
+            ))}
+            {project.tech.length > 3 && (
+              <Badge variant="outline" className="text-xs font-normal text-(--text-muted)">
+                +{project.tech.length - 3} more
+              </Badge>
+            )}
+          </div>
+        </CardContent>
+
+        <CardFooter className="pt-4 border-t border-(--border-soft) flex justify-between gap-4 z-20 bg-(--bg-secondary)">
+          <Button variant="ghost" size="sm" className="w-full group/btn" asChild>
+            <Link href={project.href}>
+              View Details 
+              <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover/btn:translate-x-1" />
+            </Link>
+          </Button>
+          
+          {project.repoUrl && (
+             <Button variant="ghost" size="icon" className="shrink-0" asChild>
+               <a href={project.repoUrl} target="_blank" rel="noopener noreferrer" aria-label="Github Repo">
+                 <Github className="h-4 w-4" />
+               </a>
+             </Button>
+          )}
+        </CardFooter>
+      </Card>
+    </motion.div>
+  );
+}
